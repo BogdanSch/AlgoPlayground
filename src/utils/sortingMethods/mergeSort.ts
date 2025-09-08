@@ -1,40 +1,44 @@
-const mergeSort = (numbers: number[]): number[] => {
-  if (numbers.length <= 1) {
-    return numbers;
-  }
+const mergeSort = (numbers: number[]): void => {
+  if (numbers.length <= 1) 
+    return;
 
   const middleIndex: number = Math.floor(numbers.length / 2);
 
   const leftHalf: number[] = numbers.slice(0, middleIndex);
   const rightHalf: number[] = numbers.slice(middleIndex);
 
-  const mergedLeftHalf = mergeSort(leftHalf);
-  const mergedRightHalf = mergeSort(rightHalf);
+  mergeSort(leftHalf);
+  mergeSort(rightHalf);
 
-  return merge(mergedLeftHalf, mergedRightHalf);
+  merge(leftHalf, rightHalf, numbers);
 };
 
-const merge = (leftHalf: number[], rightHalf: number[]): number[] => {
-  const numbers: number[] = [];
-
-  while (leftHalf.length > 0 && rightHalf.length > 0) {
-    if (leftHalf[0] > rightHalf[0]) {
-      const item: number = rightHalf.shift()!;
-      numbers.push(item);
+const merge = (leftHalf: number[], rightHalf: number[], numbers: number[]): void => {
+  let i: number = 0, j: number = 0, currentIndex = 0;
+  while (i < leftHalf.length && j < rightHalf.length) {
+    if (leftHalf[i] > rightHalf[j]) {
+      numbers[currentIndex++] = (rightHalf[j++]);
     } else {
-      const item: number = leftHalf.shift()!;
-      numbers.push(item);
+      numbers[currentIndex++] = (leftHalf[i++]);
     }
   }
 
-  for (let i: number = 0; i < leftHalf.length; i++) {
-    numbers.push(leftHalf[i]);
-  }
-  for (let i: number = 0; i < rightHalf.length; i++) {
-    numbers.push(rightHalf[i]);
+  while(i < leftHalf.length){
+    numbers[currentIndex++] = leftHalf[i++];
   }
 
-  return numbers;
+  while(j < rightHalf.length){
+    numbers[currentIndex++] = rightHalf[j++];
+  }
+
+  // for (let i: number = 0; i < leftHalf.length; i++) {
+  //   numbers.push(leftHalf[i]);
+  // }
+  // for (let i: number = 0; i < rightHalf.length; i++) {
+  //   numbers.push(rightHalf[i]);
+  // }
+
+  // return numbers;
 };
 
 export default mergeSort;

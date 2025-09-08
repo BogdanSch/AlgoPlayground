@@ -1,0 +1,1 @@
+export const SCALE_COEFFICIENT: number = 0.5;
