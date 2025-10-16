@@ -13,7 +13,7 @@ const sortingMethodsTable: SortingMethod[] = [
     name: selectionSort.name,
     method: selectionSort,
   },
-  { displayName: "Merge Sort", name: mergeSort.name, method: mergeSort },
+  // { displayName: "Merge Sort", name: mergeSort.name, method: mergeSort },
 ];
 
 export default sortingMethodsTable;
