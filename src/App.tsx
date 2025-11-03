@@ -14,7 +14,7 @@ const App: FC = () => {
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const sequence: number[] = numbersSequenceGenerator(6);
+    const sequence: number[] = numbersSequenceGenerator(10);
     setSourceNumbers(sequence);
   }, []);
 
