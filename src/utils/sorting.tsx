@@ -1,19 +1,27 @@
-import { bubbleSort, insertionSort, mergeSort, selectionSort } from "./index";
-import type { SortingMethod } from "../types";
+import {
+  generateBubbleSortSteps,
+  generateInsertionSortSteps,
+  generateSelectionSortSteps,
+} from "./index";
+import type { SortingStepGenerator } from "../types";
 
-const sortingMethodsTable: SortingMethod[] = [
-  { displayName: "Bubble Sort", name: bubbleSort.name, method: bubbleSort },
+const sortingStepGeneratorsTable: SortingStepGenerator[] = [
+  {
+    displayName: "Bubble Sort",
+    name: generateBubbleSortSteps.name,
+    method: generateBubbleSortSteps,
+  },
   {
     displayName: "Insertion Sort",
-    name: insertionSort.name,
-    method: insertionSort,
+    name: generateInsertionSortSteps.name,
+    method: generateInsertionSortSteps,
   },
   {
     displayName: "Selection Sort",
-    name: selectionSort.name,
-    method: selectionSort,
+    name: generateSelectionSortSteps.name,
+    method: generateSelectionSortSteps,
   },
   // { displayName: "Merge Sort", name: mergeSort.name, method: mergeSort },
 ];
 
-export default sortingMethodsTable;
+export default sortingStepGeneratorsTable;

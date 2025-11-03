@@ -1,5 +1,5 @@
 import { type FC, useEffect, useState, useRef } from "react";
-import { numbersSequenceGenerator } from "./utils";
+import { numbersSequenceGenerator } from "./utils/numbersGenerators";
 import { ArrayDisplay, SortingAlgorithmSelectionForm } from "./components";
 
 const App: FC = () => {
@@ -14,7 +14,7 @@ const App: FC = () => {
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const sequence: number[] = numbersSequenceGenerator(10);
+    const sequence: number[] = numbersSequenceGenerator(6);
     setSourceNumbers(sequence);
   }, []);
 

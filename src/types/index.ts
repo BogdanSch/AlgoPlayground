@@ -1,13 +1,12 @@
-export type SortingMethod = {
+export type SortStep = {
+  message: string;
+  newArray: number[];
+  leftActiveIndices: number[];
+  rightActiveIndices: number[];
+};
+
+export type SortingStepGenerator = {
   displayName: string;
   name: string;
-  method: (
-    numbers: number[],
-    showSortingSteps: boolean,
-    displayMessage: (
-      message: string,
-      leftActiveIndices: number[],
-      rightActiveIndices: number[]
-    ) => void
-  ) => Promise<void>;
+  method: (numbers: number[]) => SortStep[];
 };

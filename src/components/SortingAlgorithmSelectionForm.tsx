@@ -1,6 +1,12 @@
-import type { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
-import { sortingMethodsTable } from "../utils";
-import type { SortingMethod } from "../types";
+import {
+  useState,
+  type ChangeEvent,
+  type Dispatch,
+  type FC,
+  type SetStateAction,
+} from "react";
+import { sortingStepGeneratorsTable } from "../utils";
+import type { SortingStepGenerator, SortStep } from "../types";
 
 interface ISortingAlgorithmSelectionFormProps {
   collection: number[];
@@ -23,16 +29,20 @@ const SortingAlgorithmSelectionForm: FC<
   showSortingSteps = false,
   setShowSortingSteps,
 }) => {
-  const abortController = new AbortController();
+  const [steps, setSteps] = useState<SortStep[]>([]);
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
+  const handleShowSortingStepsChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setShowSortingSteps(event.target.checked);
+  };
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedMethodName: string = event.target.value;
     console.log(selectedMethodName);
 
-    abortController.abort();
-
-    const targetSortingMethod: SortingMethod | undefined =
-      sortingMethodsTable.find((sm) => sm.name === selectedMethodName);
+    const targetSortingMethod: SortingStepGenerator | undefined =
+      sortingStepGeneratorsTable.find((ssg) => ssg.name === selectedMethodName);
 
     if (targetSortingMethod) {
       const sortedArrayDisplay: HTMLElement | null =
@@ -40,23 +50,31 @@ const SortingAlgorithmSelectionForm: FC<
 
       const collectionCopy: number[] = [...collection];
       setCollection(collectionCopy);
+      setCurrentStep(0);
 
       sortedArrayDisplay?.scrollIntoView();
+      setSteps(targetSortingMethod.method(collectionCopy));
 
-      targetSortingMethod
-        .method(collectionCopy, showSortingSteps, displayMessage)
-        .then(() => {
-          setCollection(collectionCopy);
-          console.log("Sorted: ", collectionCopy);
-
-          sortedArrayDisplay?.scrollIntoView();
-        });
+      if (!showSortingSteps) {
+        setCollection(steps[steps.length - 1].newArray);
+        displayMessage("Sorting's completed!", [], []);
+      }
     }
   };
-  const handleShowSortingStepsChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setShowSortingSteps(event.target.checked);
+  const getNextStep = (): void => {
+    if (currentStep >= steps.length) {
+      displayMessage("Sorting's completed!", [], []);
+      return;
+    }
+
+    const step = steps[currentStep];
+    setCollection(step.newArray);
+    displayMessage(
+      step.message,
+      step.leftActiveIndices,
+      step.rightActiveIndices
+    );
+    setCurrentStep(currentStep + 1);
   };
 
   return (
@@ -73,9 +91,12 @@ const SortingAlgorithmSelectionForm: FC<
           <option value="" disabled={true}>
             Select a sorting algorithm
           </option>
-          {sortingMethodsTable.map((sortingMethod) => (
-            <option value={sortingMethod.name} key={sortingMethod.displayName}>
-              {sortingMethod.displayName}
+          {sortingStepGeneratorsTable.map((sortingStepGenerator) => (
+            <option
+              value={sortingStepGenerator.name}
+              key={sortingStepGenerator.displayName}
+            >
+              {sortingStepGenerator.displayName}
             </option>
           ))}
         </select>
@@ -92,8 +113,21 @@ const SortingAlgorithmSelectionForm: FC<
             Check me out
           </label>
         </div>
+        <div className="mb-3">
+          <button type="button" className="btn btn-danger">
+            Abort
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={getNextStep}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </form>
   );
 };
+
 export default SortingAlgorithmSelectionForm;
