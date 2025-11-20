@@ -9,6 +9,7 @@ import { sortingStepGeneratorsTable } from "../utils";
 import type { SortingStepGenerator, SortStep } from "../types";
 
 interface ISortingAlgorithmSelectionFormProps {
+  className?: string;
   collection: number[];
   setCollection: Dispatch<SetStateAction<number[]>>;
   showSortingSteps: boolean;
@@ -16,13 +17,15 @@ interface ISortingAlgorithmSelectionFormProps {
   displayMessage: (
     message: string,
     leftActiveIndices: number[],
-    rightActiveIndices: number[]
+    rightActiveIndices: number[],
+    highlightIds: string[]
   ) => void;
 }
 
 const SortingAlgorithmSelectionForm: FC<
   ISortingAlgorithmSelectionFormProps
 > = ({
+  className = "",
   collection,
   setCollection,
   displayMessage,
@@ -49,36 +52,71 @@ const SortingAlgorithmSelectionForm: FC<
         document.getElementById("sortedArrayDisplay");
 
       const collectionCopy: number[] = [...collection];
-      setCollection(collectionCopy);
+      setCollection(collection);
       setCurrentStep(0);
 
       sortedArrayDisplay?.scrollIntoView();
-      setSteps(targetSortingMethod.method(collectionCopy));
+      const newSteps: SortStep[] = targetSortingMethod.method(collectionCopy);
+      setSteps(newSteps);
 
       if (!showSortingSteps) {
-        setCollection(steps[steps.length - 1].newArray);
-        displayMessage("Sorting's completed!", [], []);
+        displayMessage("Sorting's completed!", [], [], []);
+        setCollection(newSteps[newSteps.length - 1].newArray);
+      } else {
+        setCollection(newSteps[0].newArray);
+        displayMessage(newSteps[0].message, [], [], newSteps[0].highlightIds);
       }
     }
   };
   const getNextStep = (): void => {
-    if (currentStep >= steps.length) {
-      displayMessage("Sorting's completed!", [], []);
+    if (steps.length < 1) {
+      displayMessage("There is nothing to sort!", [], [], []);
+      return;
+    }
+    if (currentStep + 1 >= steps.length) {
+      displayMessage(
+        "Sorting's completed!",
+        [],
+        [],
+        steps[steps.length - 1].highlightIds
+      );
       return;
     }
 
-    const step = steps[currentStep];
+    const step = steps[currentStep + 1];
     setCollection(step.newArray);
     displayMessage(
       step.message,
       step.leftActiveIndices,
-      step.rightActiveIndices
+      step.rightActiveIndices,
+      step.highlightIds
     );
     setCurrentStep(currentStep + 1);
   };
+  const getPreviousStep = (): void => {
+    if (steps.length < 1) {
+      displayMessage("There is nothing to sort!", [], [], []);
+      return;
+    }
+    if (currentStep === 0) {
+      setCollection(steps[0].newArray);
+      displayMessage(steps[0].message, [], [], steps[0].highlightIds);
+      return;
+    }
+
+    const step = steps[currentStep - 1];
+    setCollection(step.newArray);
+    displayMessage(
+      step.message,
+      step.leftActiveIndices,
+      step.rightActiveIndices,
+      step.highlightIds
+    );
+    setCurrentStep(currentStep - 1);
+  };
 
   return (
-    <form className="sorting-form">
+    <form className={"sorting-form" + (className ? ` ${className}` : "")}>
       <div className="mb-3">
         <label className="form-label">Select your sortings algorithm: </label>
         <select
@@ -110,12 +148,16 @@ const SortingAlgorithmSelectionForm: FC<
             onChange={handleShowSortingStepsChange}
           />
           <label className="form-check-label" htmlFor="showSortingSteps">
-            Check me out
+            Show sorting steps
           </label>
         </div>
         <div className="mb-3">
-          <button type="button" className="btn btn-danger">
-            Abort
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={getPreviousStep}
+          >
+            Previous
           </button>
           <button
             type="button"

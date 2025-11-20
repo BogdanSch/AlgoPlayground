@@ -3,6 +3,12 @@ import type { SortStep } from "../../types";
 const generateInsertionSortSteps = (numbers: number[]): SortStep[] => {
   const steps: SortStep[] = [
     {
+      message: "Start sorting",
+      newArray: [...numbers],
+      leftActiveIndices: [],
+      rightActiveIndices: [],
+    },
+    {
       message: "Let's consider the first element as sorted.",
       newArray: [...numbers],
       leftActiveIndices: [0],

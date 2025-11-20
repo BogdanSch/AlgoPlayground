@@ -9,8 +9,10 @@ export const numbersSequenceGenerator = (length: number): number[] => {
   return numbers;
 };
 
-export function* range(start: number, end: number, step = 1) {
+export const range = (start: number, end: number, step: number = 1) => {
+  const numbers: number[] = [];
   for (let i: number = start; i < end; i += step) {
-    yield i;
+    numbers.push(i);
   }
-}
+  return numbers;
+};

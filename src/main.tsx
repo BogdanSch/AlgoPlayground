@@ -1,10 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import { RouterProvider } from "react-router";
+import { router } from "./routes/Routes";
 import "./includes.tsx";
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root")!;
+
+createRoot(root).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>
 );

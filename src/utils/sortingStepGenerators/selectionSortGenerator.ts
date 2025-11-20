@@ -1,7 +1,14 @@
 import type { SortStep } from "../../types";
 
 const generateSelectionSortSteps = (numbers: number[]): SortStep[] => {
-  const steps: SortStep[] = [];
+  const steps: SortStep[] = [
+    {
+      message: "Start sorting",
+      newArray: [...numbers],
+      leftActiveIndices: [],
+      rightActiveIndices: [],
+    },
+  ];
 
   for (let i: number = 0; i < numbers.length; i++) {
     let minIndex: number = i;

@@ -1,68 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-    --light: #f8f7f7;
-    --grey: #c7c7c7;
-    --yellow: #cdee10;
-    --dark: #111111;
-    --blue: #1160d8;
+  --light: #f8f7f7;
+  --grey: #c7c7c7;
+  --yellow: #cdee10;
+  --dark: #111111;
+  --blue: #1160d8;
 
-    --fw-normal: 500;
-    --fw-bold: 700;
+  --fw-normal: 500;
+  --fw-bold: 700;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .wrapper {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* array-display - Start */
 .array-display__list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    /* gap: 4px; */
-    row-gap: 20px;
-    column-gap: 8px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  /* gap: 4px; */
+  row-gap: 20px;
+  column-gap: 8px;
 }
 
 .array-display__item {
-    /* background-color: var(--grey); */
-    /* width: 12px; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    row-gap: 4px;
-    text-align: center;
+  /* background-color: var(--grey); */
+  /* width: 12px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 4px;
+  text-align: center;
 }
 
 .array-display__item-trend {
-    padding: 4px 2px;
-    background-color: var(--grey);
+  padding: 4px 2px;
+  background-color: var(--grey);
 }
 
 .array-display__item-trend {
-    transition: all .2s ease-in-out;
-    transition: border none;
+  transition: all 0.2s ease-in-out;
+  transition: border none;
 }
 
 .array-display__item-trend.left-active {
-    background-color: var(--yellow);
-    color: var(--dark);
-    font-weight: var(--fw-bold);
+  background-color: var(--yellow);
+  color: var(--dark);
+  font-weight: var(--fw-bold);
 }
 .array-display__item-trend.right-active {
-    border: 2px dashed var(--blue);
+  border: 2px dashed var(--blue);
 }
 /* array-display - End */
+/* code-block - Start*/
+.code-block__line {
+  white-space: pre;
+}
+.code-block__line--highlight {
+  background-color: var(--yellow);
+  border-radius: 4px;
+}
+/* code-block - End */

@@ -1,6 +1,7 @@
 export type SortStep = {
   message: string;
   newArray: number[];
+  highlightIds: string[];
   leftActiveIndices: number[];
   rightActiveIndices: number[];
 };

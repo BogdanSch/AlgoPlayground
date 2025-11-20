@@ -2,6 +2,7 @@ import {
   generateBubbleSortSteps,
   generateInsertionSortSteps,
   generateSelectionSortSteps,
+  generateMergeSortSteps,
 } from "./index";
 import type { SortingStepGenerator } from "../types";
 
@@ -21,7 +22,11 @@ const sortingStepGeneratorsTable: SortingStepGenerator[] = [
     name: generateSelectionSortSteps.name,
     method: generateSelectionSortSteps,
   },
-  // { displayName: "Merge Sort", name: mergeSort.name, method: mergeSort },
+  {
+    displayName: "Merge Sort",
+    name: generateMergeSortSteps.name,
+    method: generateMergeSortSteps,
+  },
 ];
 
 export default sortingStepGeneratorsTable;
