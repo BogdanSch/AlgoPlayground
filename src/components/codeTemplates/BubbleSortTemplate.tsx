@@ -6,9 +6,9 @@ interface IBubbleSortTemplateProps {
 
 const BubbleSortTemplate: FC<IBubbleSortTemplateProps> = ({ highlightIds }) => {
   const bubbleCode = [
-    { text: "def bubbleSort(numbers: list[int]) -> None:" },
+    { text: "def bubbleSort(numbers: list[int]) -> None:", id: "start" },
     { text: "    n: int = len(numbers)" },
-    { text: "    for i in range(n - 1):", id: "begin" },
+    { text: "    for i in range(n - 1):" },
     { text: "        swapped: bool = False" },
     { text: "        for j in range(n - i - 1):" },
     {

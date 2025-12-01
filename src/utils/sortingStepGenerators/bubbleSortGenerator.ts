@@ -7,7 +7,7 @@ const generateBubbleSortSteps = (numbers: number[]): SortStep[] => {
       newArray: [...numbers],
       leftActiveIndices: [],
       rightActiveIndices: [],
-      highlightIds: ["begin"],
+      highlightIds: ["start"],
     },
   ];
   let swapped: boolean = false;

@@ -3,6 +3,8 @@ import { numbersSequenceGenerator } from "../utils/numbersGenerators";
 import {
   ArrayDisplay,
   BubbleSortTemplate,
+  SelectionSortTemplate,
+  InsertionSortTemplate,
   SortingAlgorithmSelectionForm,
 } from "../components";
 
@@ -66,6 +68,8 @@ const Homepage: FC = () => {
             setCollection={setSortedNumbers}
             displayMessage={displayMessage}
           />
+          {/* <InsertionSortTemplate highlightIds={highlightIds} /> */}
+          {/* <SelectionSortTemplate highlightIds={highlightIds} /> */}
           <BubbleSortTemplate highlightIds={highlightIds} />
           <ArrayDisplay
             className="mt-5"

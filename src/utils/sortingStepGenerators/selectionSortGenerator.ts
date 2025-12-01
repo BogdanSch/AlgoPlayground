@@ -7,6 +7,7 @@ const generateSelectionSortSteps = (numbers: number[]): SortStep[] => {
       newArray: [...numbers],
       leftActiveIndices: [],
       rightActiveIndices: [],
+      highlightIds: ["start"],
     },
   ];
 
@@ -18,6 +19,7 @@ const generateSelectionSortSteps = (numbers: number[]): SortStep[] => {
       newArray: [...numbers],
       leftActiveIndices: [i],
       rightActiveIndices: [],
+      highlightIds: ["minIndex"],
     });
 
     for (let j: number = i + 1; j < numbers.length; j++) {
@@ -26,10 +28,12 @@ const generateSelectionSortSteps = (numbers: number[]): SortStep[] => {
         newArray: [...numbers],
         leftActiveIndices: [minIndex],
         rightActiveIndices: [j],
+        highlightIds: ["compare"],
       };
 
       if (numbers[j] < numbers[minIndex]) {
         step.message = `${numbers[j]} < the minimum ${numbers[minIndex]} -> Update the minimum.`;
+        step.highlightIds.push("isLess");
         minIndex = j;
       } else {
         step.message = `${numbers[j]} is >= the minimum ${numbers[minIndex]} -> No need to update the minimum.`;
@@ -44,6 +48,7 @@ const generateSelectionSortSteps = (numbers: number[]): SortStep[] => {
       newArray: [...numbers],
       leftActiveIndices: [i],
       rightActiveIndices: [minIndex],
+      highlightIds: ["swap"],
     });
   }
 
