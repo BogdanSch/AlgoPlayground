@@ -1,23 +1,30 @@
-import { type FC, useEffect, useState, useRef } from "react";
-import { numbersSequenceGenerator } from "../utils/numbersGenerators";
+import { useEffect, useRef, useState } from "react";
+import { numbersSequenceGenerator } from "../../utils/numbersGenerators";
 import {
   ArrayDisplay,
-  BubbleSortTemplate,
-  SelectionSortTemplate,
-  InsertionSortTemplate,
+  MergeSortTemplate,
   SortingAlgorithmSelectionForm,
-} from "../components";
+} from "../../components";
+import RecursiveTreeArrayDisplay from "../../components/arrayDisplays/RecursiveTreeArrayDisplay";
 
-const Homepage: FC = () => {
+const MergeSortPage = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
   const [sortedNumbers, setSortedNumbers] = useState<number[]>([]);
+  const [leftCollection, setLeftCollection] = useState<number[]>([]);
+  const [rightCollection, setRightCollection] = useState<number[]>([]);
 
   const [leftActiveIndices, setLeftActiveIndices] = useState<number[]>([]);
   const [rightActiveIndices, setRightActiveIndices] = useState<number[]>([]);
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
 
-  const [showSortingSteps, setShowSortingSteps] = useState<boolean>(true);
+  const [leftArrayActiveIndices, setLeftArrayActiveIndices] = useState<
+    number[]
+  >([]);
+  const [rightArrayActiveIndices, setRightArrayActiveIndices] = useState<
+    number[]
+  >([]);
 
+  const [showSortingSteps, setShowSortingSteps] = useState<boolean>(true);
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -29,7 +36,9 @@ const Homepage: FC = () => {
     message: string,
     leftActiveIndices: number[],
     rightActiveIndices: number[],
-    highlightIds: string[]
+    highlightIds: string[],
+    leftArrayActiveIndices?: number[],
+    rightArrayActiveIndices?: number[]
   ): void => {
     if (!showSortingSteps) return;
 
@@ -39,20 +48,17 @@ const Homepage: FC = () => {
     setLeftActiveIndices(leftActiveIndices);
     setRightActiveIndices(rightActiveIndices);
     setHighlightIds(highlightIds);
+    setLeftArrayActiveIndices(leftArrayActiveIndices ?? []);
+    setRightArrayActiveIndices(rightArrayActiveIndices ?? []);
 
     sortingSteps.innerHTML = message;
   };
 
   return (
-    <section className="app">
+    <section className="array-sort">
       <div className="container">
-        <div className="app__wrap">
-          <div className="text-content text-center">
-            <h1 className="app__title">Algo Playground</h1>
-            <p className="app__description">
-              Explore and visualize various sorting algorithms in action!
-            </p>
-          </div>
+        <div className="array-sort__wrap">
+          <h1 className="heading">Merge Sort Algorithm</h1>
           <ArrayDisplay
             className="mt-5"
             id="sourceArrayDisplay"
@@ -64,20 +70,24 @@ const Homepage: FC = () => {
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
+            setCollection={setSortedNumbers}
             showSortingSteps={showSortingSteps}
             setShowSortingSteps={setShowSortingSteps}
-            setCollection={setSortedNumbers}
             displayMessage={displayMessage}
+            setLeftCollection={setLeftCollection}
+            setRightCollection={setRightCollection}
           />
-          <InsertionSortTemplate highlightIds={highlightIds} />
-          {/* <SelectionSortTemplate highlightIds={highlightIds} /> */}
-          {/* <BubbleSortTemplate highlightIds={highlightIds} /> */}
-          <ArrayDisplay
+          <MergeSortTemplate highlightIds={highlightIds} />
+          <RecursiveTreeArrayDisplay
             className="mt-5"
             id="sortedArrayDisplay"
             collection={sortedNumbers}
             leftActiveIndices={leftActiveIndices}
             rightActiveIndices={rightActiveIndices}
+            leftCollection={leftCollection}
+            rightCollection={rightCollection}
+            leftArrayActiveIndices={leftArrayActiveIndices}
+            rightArrayActiveIndices={rightArrayActiveIndices}
           >
             <h2 className="title">Sorted data</h2>
             <p className="text">
@@ -90,11 +100,11 @@ const Homepage: FC = () => {
             >
               Start by selecting one of the methods
             </div>
-          </ArrayDisplay>
+          </RecursiveTreeArrayDisplay>
         </div>
       </div>
     </section>
   );
 };
 
-export default Homepage;
+export default MergeSortPage;

@@ -10,6 +10,7 @@ export const numbersSequenceGenerator = (length: number): number[] => {
 };
 
 export const range = (start: number, end: number, step: number = 1) => {
+  if (start === end) return [];
   const numbers: number[] = [];
   for (let i: number = start; i < end; i += step) {
     numbers.push(i);

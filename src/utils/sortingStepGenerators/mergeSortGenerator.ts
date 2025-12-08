@@ -1,95 +1,106 @@
-import type { SortStep } from "../../types";
+import type { DivideAndConquerSortStep } from "../../types";
 import { range } from "../numbersGenerators";
 
 const generateMergeSortSteps = (numbers: number[]) => {
-  const steps: SortStep[] = [
+  const steps: DivideAndConquerSortStep[] = [
     {
       message: "Start sorting",
       newArray: [...numbers],
       leftActiveIndices: [],
       rightActiveIndices: [],
+      newLeftArrayHalf: [],
+      newRightArrayHalf: [],
+      leftArrayActiveIndices: [],
+      rightArrayActiveIndices: [],
+      highlightIds: ["start"],
     },
   ];
   mergeSort(numbers, steps);
   return steps;
 };
 
-const mergeSort = (numbers: number[], steps: SortStep[]): void => {
+const mergeSort = (
+  numbers: number[],
+  steps: DivideAndConquerSortStep[]
+): void => {
   if (numbers.length <= 1) {
     steps.push({
       newArray: [...numbers],
-      message: `The length of the array is ${numbers.length} -> No need to sort (back track).`,
+      message: `The length of the array is 1 -> We can't split it anymore. Let's prepare to merge the halves.`,
       leftActiveIndices: [],
       rightActiveIndices: [],
+      newLeftArrayHalf: [],
+      newRightArrayHalf: [],
+      leftArrayActiveIndices: [],
+      rightArrayActiveIndices: [],
+      highlightIds: ["baseCase"],
     });
     return;
   }
 
-  steps.push({
-    newArray: [...numbers],
-    message: `Let's split the array into two halves.`,
-    leftActiveIndices: [],
-    rightActiveIndices: [],
-  });
   const middleIndex: number = Math.floor(numbers.length / 2);
-  steps.push({
-    newArray: [...numbers],
-    message: `The middle index is ${middleIndex}.`,
-    leftActiveIndices: [middleIndex],
-    rightActiveIndices: [middleIndex],
-  });
-
   const leftHalf: number[] = numbers.slice(0, middleIndex);
   const rightHalf: number[] = numbers.slice(middleIndex);
 
   steps.push({
-    newArray: [...leftHalf],
-    message: `The left half of the original array.`,
-    leftActiveIndices: range(0, leftHalf.length),
-    rightActiveIndices: [],
-  });
-  steps.push({
-    newArray: [...rightHalf],
-    message: `The right half of the original array.`,
-    leftActiveIndices: range(0, rightHalf.length),
-    rightActiveIndices: [],
+    newArray: [...numbers],
+    message: `Let's split the array into two halves. The middle index is ${middleIndex}.`,
+    leftActiveIndices: range(0, middleIndex),
+    rightActiveIndices: range(middleIndex, numbers.length),
+    newLeftArrayHalf: [...leftHalf],
+    newRightArrayHalf: [...rightHalf],
+    leftArrayActiveIndices: range(0, leftHalf.length),
+    rightArrayActiveIndices: range(0, rightHalf.length),
+    highlightIds: ["splittingHalves"],
   });
 
   mergeSort(leftHalf, steps);
   mergeSort(rightHalf, steps);
 
-  merge(leftHalf, rightHalf, numbers, steps);
   steps.push({
     newArray: [...numbers],
-    message: `Merging the two halves back together.`,
-    leftActiveIndices: range(0, numbers.length),
-    rightActiveIndices: [],
+    message: `Let's merge the two halves back together.`,
+    leftActiveIndices: range(0, middleIndex),
+    rightActiveIndices: range(middleIndex, numbers.length),
+    newLeftArrayHalf: [...leftHalf],
+    newRightArrayHalf: [...rightHalf],
+    leftArrayActiveIndices: range(0, leftHalf.length),
+    rightArrayActiveIndices: range(0, rightHalf.length),
+    highlightIds: ["mergeCall"],
   });
+  merge(leftHalf, rightHalf, numbers, steps);
 };
 
 const merge = (
   leftHalf: number[],
   rightHalf: number[],
   numbers: number[],
-  steps: SortStep[]
+  steps: DivideAndConquerSortStep[]
 ): void => {
   let i: number = 0,
     j: number = 0,
     currentIndex: number = 0;
 
   while (i < leftHalf.length && j < rightHalf.length) {
-    const step: SortStep = {
+    const step: DivideAndConquerSortStep = {
       newArray: [...numbers],
       message: "",
-      leftActiveIndices: [j],
-      rightActiveIndices: [i],
+      leftActiveIndices: [currentIndex],
+      rightActiveIndices: [],
+      newLeftArrayHalf: [...leftHalf],
+      newRightArrayHalf: [...rightHalf],
+      leftArrayActiveIndices: [i],
+      rightArrayActiveIndices: [j],
+      highlightIds: [],
     };
 
     if (leftHalf[i] > rightHalf[j]) {
-      step.message = `${rightHalf[j]} is less than ${leftHalf[i]} -> paste ${rightHalf[j]} into the main array.`;
+      step.message = `${rightHalf[j]} is less than or equal ${leftHalf[i]} -> paste ${rightHalf[j]} into the main array.`;
+      step.highlightIds.push(`takeRight`);
       numbers[currentIndex++] = rightHalf[j++];
     } else {
       step.message = `${rightHalf[j]} is greater than ${leftHalf[i]} -> paste ${leftHalf[i]} into the main array.`;
+      step.highlightIds.push(`takeLeft`);
       numbers[currentIndex++] = leftHalf[i++];
     }
     steps.push(step);
@@ -97,30 +108,55 @@ const merge = (
 
   steps.push({
     newArray: [...numbers],
-    message: `We know that one of the halves is empty -> paste the remaining elements into the main array.`,
-    leftActiveIndices: [],
+    message: `We know that one of the halves is empty -> let's paste the remaining elements into the main array.`,
+    leftActiveIndices: [currentIndex],
     rightActiveIndices: [],
+    newLeftArrayHalf: [...leftHalf],
+    newRightArrayHalf: [...rightHalf],
+    leftArrayActiveIndices: range(0, leftHalf.length),
+    rightArrayActiveIndices: range(0, rightHalf.length),
+    highlightIds: [],
   });
-
   while (i < leftHalf.length) {
     steps.push({
       newArray: [...numbers],
       message: `Pasting ${leftHalf[i]} into the main array.`,
       leftActiveIndices: [currentIndex],
       rightActiveIndices: [],
+      newLeftArrayHalf: [...leftHalf],
+      newRightArrayHalf: [...rightHalf],
+      leftArrayActiveIndices: range(i, leftHalf.length),
+      rightArrayActiveIndices: [],
+      highlightIds: ["pasteRemainingLeft"],
     });
     numbers[currentIndex++] = leftHalf[i++];
   }
-
   while (j < rightHalf.length) {
     steps.push({
       newArray: [...numbers],
       message: `Pasting ${rightHalf[j]} into the main array.`,
       leftActiveIndices: [currentIndex],
       rightActiveIndices: [],
+      newLeftArrayHalf: [...leftHalf],
+      newRightArrayHalf: [...rightHalf],
+      leftArrayActiveIndices: [],
+      rightArrayActiveIndices: range(j, rightHalf.length),
+      highlightIds: ["pasteRemainingRight"],
     });
     numbers[currentIndex++] = rightHalf[j++];
   }
+
+  steps.push({
+    newArray: [...numbers],
+    message: "Finished merging both halves.",
+    leftActiveIndices: range(0, numbers.length),
+    rightActiveIndices: [],
+    newLeftArrayHalf: [...leftHalf],
+    newRightArrayHalf: [...rightHalf],
+    leftArrayActiveIndices: [],
+    rightArrayActiveIndices: [],
+    highlightIds: ["mergeCompleted"],
+  });
 };
 
 export default generateMergeSortSteps;

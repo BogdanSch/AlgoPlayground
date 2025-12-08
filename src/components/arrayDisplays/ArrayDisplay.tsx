@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { SCALE_COEFFICIENT } from "../clientVariables";
+import { SCALE_COEFFICIENT } from "../../clientVariables";
 
 interface IArrayDisplayProps {
   collection: number[];

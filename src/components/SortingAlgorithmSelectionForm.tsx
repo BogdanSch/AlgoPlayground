@@ -6,19 +6,27 @@ import {
   type SetStateAction,
 } from "react";
 import { sortingStepGeneratorsTable } from "../utils";
-import type { SortingStepGenerator, SortStep } from "../types";
+import type {
+  SortingStepGenerator,
+  SortStep,
+  DivideAndConquerSortStep,
+} from "../types";
 
 interface ISortingAlgorithmSelectionFormProps {
   className?: string;
   collection: number[];
   setCollection: Dispatch<SetStateAction<number[]>>;
+  setLeftCollection?: Dispatch<SetStateAction<number[]>>;
+  setRightCollection?: Dispatch<SetStateAction<number[]>>;
   showSortingSteps: boolean;
   setShowSortingSteps: Dispatch<SetStateAction<boolean>>;
   displayMessage: (
     message: string,
     leftActiveIndices: number[],
     rightActiveIndices: number[],
-    highlightIds: string[]
+    highlightIds: string[],
+    rightArrayActiveIndices?: number[],
+    leftArrayActiveIndices?: number[]
   ) => void;
 }
 
@@ -28,6 +36,8 @@ const SortingAlgorithmSelectionForm: FC<
   className = "",
   collection,
   setCollection,
+  setLeftCollection,
+  setRightCollection,
   displayMessage,
   showSortingSteps = false,
   setShowSortingSteps,
@@ -68,6 +78,16 @@ const SortingAlgorithmSelectionForm: FC<
       }
     }
   };
+  function isDivideAndConquerStep(
+    step: SortStep
+  ): step is DivideAndConquerSortStep {
+    return (
+      "newLeftArrayHalf" in step &&
+      "newRightArrayHalf" in step &&
+      "leftArrayActiveIndices" in step &&
+      "rightArrayActiveIndices" in step
+    );
+  }
   const getNextStep = (): void => {
     if (steps.length < 1) {
       displayMessage("There is nothing to sort!", [], [], []);
@@ -85,12 +105,26 @@ const SortingAlgorithmSelectionForm: FC<
 
     const step = steps[currentStep + 1];
     setCollection(step.newArray);
-    displayMessage(
-      step.message,
-      step.leftActiveIndices,
-      step.rightActiveIndices,
-      step.highlightIds
-    );
+    if (isDivideAndConquerStep(step)) {
+      setLeftCollection?.(step.newLeftArrayHalf);
+      setRightCollection?.(step.newRightArrayHalf);
+      displayMessage(
+        step.message,
+        step.leftActiveIndices,
+        step.rightActiveIndices,
+        step.highlightIds,
+        step.leftArrayActiveIndices,
+        step.rightArrayActiveIndices
+      );
+    } else {
+      displayMessage(
+        step.message,
+        step.leftActiveIndices,
+        step.rightActiveIndices,
+        step.highlightIds
+      );
+    }
+
     setCurrentStep(currentStep + 1);
   };
   const getPreviousStep = (): void => {
@@ -106,12 +140,25 @@ const SortingAlgorithmSelectionForm: FC<
 
     const step = steps[currentStep - 1];
     setCollection(step.newArray);
-    displayMessage(
-      step.message,
-      step.leftActiveIndices,
-      step.rightActiveIndices,
-      step.highlightIds
-    );
+    if (isDivideAndConquerStep(step)) {
+      setLeftCollection?.(step.newLeftArrayHalf);
+      setRightCollection?.(step.newRightArrayHalf);
+      displayMessage(
+        step.message,
+        step.leftActiveIndices,
+        step.rightActiveIndices,
+        step.highlightIds,
+        step.leftArrayActiveIndices,
+        step.rightArrayActiveIndices
+      );
+    } else {
+      displayMessage(
+        step.message,
+        step.leftActiveIndices,
+        step.rightActiveIndices,
+        step.highlightIds
+      );
+    }
     setCurrentStep(currentStep - 1);
   };
 
