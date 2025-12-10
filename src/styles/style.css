@@ -23,6 +23,10 @@ body {
   overflow: hidden;
 }
 
+.main {
+  flex: 1;
+}
+
 /* array-display - Start */
 .array-display__list {
   list-style: none;
@@ -79,3 +83,35 @@ body {
   border-radius: 4px;
 }
 /* code-block - End */
+
+  th, td {
+    border: 1px solid black;
+    padding: 20px !important;
+  }
+
+  .navigation {
+    display: inline-block; 
+    transition: transform 0.3s ease;
+    transform-origin: right center; 
+  }
+
+  .navigation:hover {
+    transform: scale(1.5); 
+  }
+  nav {
+      background-color : var(--grey);
+      position: fixed;
+      font-size: 25px;
+      padding: 10px;
+      margin-left: 10px;
+      top: 50%;
+  }
+
+  #content {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+  }
+  .CodeExp {
+    
+  }

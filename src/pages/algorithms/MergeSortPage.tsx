@@ -59,6 +59,7 @@ const MergeSortPage = () => {
       <div className="container">
         <div className="array-sort__wrap">
           <h1 className="heading">Merge Sort Algorithm</h1>
+          
           <ArrayDisplay
             className="mt-5"
             id="sourceArrayDisplay"
