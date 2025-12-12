@@ -113,8 +113,8 @@ const merge = (
     rightActiveIndices: [],
     newLeftArrayHalf: [...leftHalf],
     newRightArrayHalf: [...rightHalf],
-    leftArrayActiveIndices: range(0, leftHalf.length),
-    rightArrayActiveIndices: range(0, rightHalf.length),
+    leftArrayActiveIndices: range(i, leftHalf.length),
+    rightArrayActiveIndices: range(j, rightHalf.length),
     highlightIds: [],
   });
   while (i < leftHalf.length) {
@@ -125,7 +125,7 @@ const merge = (
       rightActiveIndices: [],
       newLeftArrayHalf: [...leftHalf],
       newRightArrayHalf: [...rightHalf],
-      leftArrayActiveIndices: range(i, leftHalf.length),
+      leftArrayActiveIndices: [i],
       rightArrayActiveIndices: [],
       highlightIds: ["pasteRemainingLeft"],
     });
@@ -140,7 +140,7 @@ const merge = (
       newLeftArrayHalf: [...leftHalf],
       newRightArrayHalf: [...rightHalf],
       leftArrayActiveIndices: [],
-      rightArrayActiveIndices: range(j, rightHalf.length),
+      rightArrayActiveIndices: [j],
       highlightIds: ["pasteRemainingRight"],
     });
     numbers[currentIndex++] = rightHalf[j++];
@@ -153,8 +153,8 @@ const merge = (
     rightActiveIndices: [],
     newLeftArrayHalf: [...leftHalf],
     newRightArrayHalf: [...rightHalf],
-    leftArrayActiveIndices: [],
-    rightArrayActiveIndices: [],
+    leftArrayActiveIndices: [leftHalf.length],
+    rightArrayActiveIndices: [rightHalf.length],
     highlightIds: ["mergeCompleted"],
   });
 };

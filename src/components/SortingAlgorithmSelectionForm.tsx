@@ -1,19 +1,23 @@
 import {
   useState,
+  useEffect,
   type ChangeEvent,
   type Dispatch,
   type FC,
   type SetStateAction,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { sortingStepGeneratorsTable } from "../utils";
 import type {
   SortingStepGenerator,
   SortStep,
   DivideAndConquerSortStep,
 } from "../types";
+import { isNullOrWhitespace } from "../utils/stringHelper";
 
 interface ISortingAlgorithmSelectionFormProps {
   className?: string;
+  defaultAlgorithmName?: string;
   collection: number[];
   setCollection: Dispatch<SetStateAction<number[]>>;
   setLeftCollection?: Dispatch<SetStateAction<number[]>>;
@@ -41,9 +45,27 @@ const SortingAlgorithmSelectionForm: FC<
   displayMessage,
   showSortingSteps = false,
   setShowSortingSteps,
+  defaultAlgorithmName,
 }) => {
   const [steps, setSteps] = useState<SortStep[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const navigate = useNavigate();
+  const filteredSortingStepGeneratorsTable = isNullOrWhitespace(
+    defaultAlgorithmName
+  )
+    ? sortingStepGeneratorsTable
+    : sortingStepGeneratorsTable.filter(
+        (ssg) => ssg.name === defaultAlgorithmName
+      );
+
+  useEffect(() => {
+    if (isNullOrWhitespace(defaultAlgorithmName)) return;
+    const targetSortingMethod: SortingStepGenerator | undefined =
+      sortingStepGeneratorsTable.find(
+        (ssg) => ssg.name === defaultAlgorithmName
+      );
+    if (!targetSortingMethod) navigate("/");
+  }, [defaultAlgorithmName]);
 
   const handleShowSortingStepsChange = (
     event: ChangeEvent<HTMLInputElement>
@@ -51,7 +73,9 @@ const SortingAlgorithmSelectionForm: FC<
     setShowSortingSteps(event.target.checked);
   };
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedMethodName: string = event.target.value;
+    const selectedMethodName: string = isNullOrWhitespace(defaultAlgorithmName)
+      ? event.target.value
+      : defaultAlgorithmName!;
     console.log(selectedMethodName);
 
     const targetSortingMethod: SortingStepGenerator | undefined =
@@ -165,18 +189,18 @@ const SortingAlgorithmSelectionForm: FC<
   return (
     <form className={"sorting-form" + (className ? ` ${className}` : "")}>
       <div className="mb-3">
-        <label className="form-label">Select your sortings algorithm: </label>
+        <label className="form-label">Select your sortings algorithm:</label>
         <select
           className="form-select"
           name="algorithmsSelector"
-          aria-label="Select array sorting algorithm"
+          aria-label="Select numbers array sorting algorithm"
           onChange={handleChange}
           defaultValue={""}
         >
           <option value="" disabled={true}>
             Select a sorting algorithm
           </option>
-          {sortingStepGeneratorsTable.map((sortingStepGenerator) => (
+          {filteredSortingStepGeneratorsTable.map((sortingStepGenerator) => (
             <option
               value={sortingStepGenerator.name}
               key={sortingStepGenerator.displayName}

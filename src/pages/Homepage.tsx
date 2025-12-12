@@ -68,8 +68,9 @@ const Homepage: FC = () => {
             setShowSortingSteps={setShowSortingSteps}
             setCollection={setSortedNumbers}
             displayMessage={displayMessage}
+            // defaultAlgorithmName="generateInsertionSortSteps"
           />
-          <InsertionSortTemplate highlightIds={highlightIds} />
+          {/* <InsertionSortTemplate highlightIds={highlightIds} /> */}
           {/* <SelectionSortTemplate highlightIds={highlightIds} /> */}
           {/* <BubbleSortTemplate highlightIds={highlightIds} /> */}
           <ArrayDisplay
