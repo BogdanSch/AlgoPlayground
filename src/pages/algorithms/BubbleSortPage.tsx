@@ -17,9 +17,9 @@ const BubbleSortPage: FC = () => {
             <p> </p>
             <h3>Important variables</h3>
             <ul>
-                 <li>n = number of elements in arr.</li> 
-                 <li>i = index for the outer loop (how many full passes have been completed).</li>
-                 <li>j = index for the inner loop (compare and swap neighboring elements arr[j] and arr[j+1]).</li> 
+                 <li><code>n</code> = number of elements in arr.</li> 
+                 <li><code>i</code> = index for the outer loop (how many full passes have been completed).</li>
+                 <li><code>j</code> = index for the inner loop (compare and swap neighboring elements <code>arr[j]</code> and <code>arr[j+1]</code>).</li> 
             </ul>
             <h3>Outer Loop</h3>
             <p className="CodeExp"><code>for i = 0 to n - 1 </code></p>
