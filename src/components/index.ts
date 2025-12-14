@@ -1,4 +1,5 @@
 export { default as ArrayDisplay } from "./arrayDisplays/ArrayDisplay";
+export { default as RecursiveTreeArrayDisplay } from "./arrayDisplays/RecursiveTreeArrayDisplay";
 
 export { default as SortingAlgorithmSelectionForm } from "./SortingAlgorithmSelectionForm";
 

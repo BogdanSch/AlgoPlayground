@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { numbersSequenceGenerator } from "../../utils/numbersGenerators";
 import {
   ArrayDisplay,
   MergeSortTemplate,
   SortingAlgorithmSelectionForm,
+  RecursiveTreeArrayDisplay,
 } from "../../components";
-import RecursiveTreeArrayDisplay from "../../components/arrayDisplays/RecursiveTreeArrayDisplay";
+import { sortingStepGeneratorsTable } from "../../utils";
+import { numbersSequenceGenerator } from "../../utils/numbersGenerators";
 import pseudocodeMerge from "../../images/Pseudomerge.png";
 
 const MergeSortPage = () => {
@@ -59,26 +60,38 @@ const MergeSortPage = () => {
     <section className="array-sort">
       <div className="container">
         <div className="array-sort__wrap">
-    
-          <h1 className="heading">Merge Sort</h1>
-           <p>Merge Sort is one of the most efficient sorting algorithms. It works by repeatedly dividing the problem into smaller parts, instead of sorting the whole list at once. By breaking a large problem into smaller, easier problems, Merge Sort can sort data very efficiently, even for large lists.</p>
-          <h3>PseudoCode:</h3>
-          <img src={pseudocodeMerge} alt="pseudo"></img>
-          <h3>Important variables</h3>
+          <article className="array-sort__article">
+            <h1 className="heading">Merge Sort</h1>
+            <p>
+              Merge Sort is one of the most efficient sorting algorithms. It
+              works by repeatedly dividing the problem into smaller parts,
+              instead of sorting the whole list at once. By breaking a large
+              problem into smaller, easier problems, Merge Sort can sort data
+              very efficiently, even for large lists.
+            </p>
+            <h3>PseudoCode:</h3>
+            <img src={pseudocodeMerge} alt="pseudo"></img>
+            <h3>Important variables</h3>
             <ul>
-              <li><code>arr</code> = the array to be sorted.</li>
-              <li><code>left</code> = starting index of the current subarray.</li>
-              <li><code>right</code> = ending index of the current subarray.</li>
-              <li><code>mid</code> = middle index used to split the array.</li>
+              <li>
+                <code>arr</code> = the array to be sorted.
+              </li>
+              <li>
+                <code>left</code> = starting index of the current subarray.
+              </li>
+              <li>
+                <code>right</code> = ending index of the current subarray.
+              </li>
+              <li>
+                <code>mid</code> = middle index used to split the array.
+              </li>
             </ul>
 
             <h3>Stop Condition</h3>
             <p className="CodeExp">
               <code>if left &gt; right return</code>
             </p>
-            <p>
-              This condition stops the recursion.
-            </p>
+            <p>This condition stops the recursion.</p>
             <p>
               If the subarray has one or zero elements, it is already sorted.
             </p>
@@ -87,27 +100,25 @@ const MergeSortPage = () => {
             <p className="CodeExp">
               <code>mid = (left + right) / 2</code>
             </p>
-            <p>
-              The array is divided into two halves:
-            </p>
+            <p>The array is divided into two halves:</p>
             <ul>
-              <li>Left half: <code>left</code> to <code>mid</code></li>
-              <li>Right half: <code>mid + 1</code> to <code>right</code></li>
+              <li>
+                Left half: <code>left</code> to <code>mid</code>
+              </li>
+              <li>
+                Right half: <code>mid + 1</code> to <code>right</code>
+              </li>
             </ul>
             <h3>Repetitive Calls</h3>
             <p className="CodeExp">
               <code>mergeSort(arr, left, mid)</code>
             </p>
-            <p>
-              This recursively sorts the left half of the array.
-            </p>
+            <p>This recursively sorts the left half of the array.</p>
 
             <p className="CodeExp">
               <code>mergeSort(arr, mid + 1, right)</code>
             </p>
-            <p>
-              This recursively sorts the right half of the array.
-            </p>
+            <p>This recursively sorts the right half of the array.</p>
 
             <h3>Merging the halves</h3>
             <p className="CodeExp">
@@ -117,69 +128,67 @@ const MergeSortPage = () => {
               This step combines the two sorted halves into one sorted subarray.
             </p>
             <p>
-              Elements from both halves are compared and placed back into the array
-              in the correct order.
+              Elements from both halves are compared and placed back into the
+              array in the correct order.
             </p>
             <h1 id="Table">Example:</h1>
 
-              <table className="table">
-                <tbody>
+            <table className="table">
+              <tbody>
+                <p>Input:</p>
+                <tr>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>7</td>
+                  <td>10</td>
+                  <td>17</td>
+                  <td>3</td>
+                </tr>
 
-                  <p>Input:</p>
-                  <tr>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                  </tr>
-                  <tr>
-                    <td>23</td>
-                    <td>7</td>
-                    <td>10</td>
-                    <td>17</td>
-                    <td>3</td>
-                  </tr>
+                <p>Split into halves:</p>
+                <tr>
+                  <td>[23, 7, 10] </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>[17, 3]</td>
+                </tr>
 
-                  <p>Split into halves:</p>
-                  <tr>
-                    <td>[23, 7, 10] </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>[17, 3]</td>
-                  </tr>
+                <p>Split again:</p>
+                <tr>
+                  <td>[23]</td>
+                  <td>[7, 10] </td>
+                  <td></td>
+                  <td>[17]</td>
+                  <td>[3]</td>
+                </tr>
 
-                  <p>Split again:</p>
-                  <tr>
-                    <td>[23]</td>
-                    <td>[7, 10] </td>
-                    <td></td>
-                    <td>[17]</td>
-                    <td>[3]</td>
-                  </tr>
+                <p>Merge sorted subarrays:</p>
+                <tr>
+                  <td>[23] + [7, 10] → [7, 10, 23]</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>[17] + [3] → [3, 17]</td>
+                </tr>
 
-                  <p>Merge sorted subarrays:</p>
-                  <tr>
-                    <td>[23] + [7, 10] → [7, 10, 23]</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                      <td>[17] + [3] → [3, 17]</td>
-                  </tr>
-
-
-                  <p>Final merge:</p>
-                  <tr>
-                    <td>3</td>
-                    <td>7</td>
-                    <td>10</td>
-                    <td>17</td>
-                    <td>23</td>
-                  </tr>
-
-                </tbody>
-              </table>
+                <p>Final merge:</p>
+                <tr>
+                  <td>3</td>
+                  <td>7</td>
+                  <td>10</td>
+                  <td>17</td>
+                  <td>23</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
           <ArrayDisplay
             className="mt-5"
             id="sourceArrayDisplay"
@@ -188,6 +197,7 @@ const MergeSortPage = () => {
             <h2 className="title">Row data</h2>
             <p className="text">This is your original array.</p>
           </ArrayDisplay>
+          <MergeSortTemplate highlightIds={highlightIds} />
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
@@ -197,8 +207,12 @@ const MergeSortPage = () => {
             displayMessage={displayMessage}
             setLeftCollection={setLeftCollection}
             setRightCollection={setRightCollection}
+            defaultAlgorithmName={
+              sortingStepGeneratorsTable.find(
+                (stg) => stg.displayName === "Merge Sort"
+              )?.name
+            }
           />
-          <MergeSortTemplate highlightIds={highlightIds} />
           <RecursiveTreeArrayDisplay
             className="mt-5"
             id="sortedArrayDisplay"
