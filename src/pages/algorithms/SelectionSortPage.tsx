@@ -16,7 +16,6 @@ const SelectionSortPage: FC = () => {
   const [rightActiveIndices, setRightActiveIndices] = useState<number[]>([]);
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
 
-  const [showSortingSteps, setShowSortingSteps] = useState<boolean>(true);
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -30,8 +29,6 @@ const SelectionSortPage: FC = () => {
     rightActiveIndices: number[],
     highlightIds: string[]
   ): void => {
-    if (!showSortingSteps) return;
-
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
 
@@ -145,10 +142,12 @@ const SelectionSortPage: FC = () => {
               <li>The element at the first unsorted index</li>
             </ul>
             <p>This expands the sorted part by one element.</p>
-            <h1 id="Table"> Example:</h1>
+            <h2 id="Table"> Example:</h2>
             <table className="table">
               <tbody>
-                <p>Input:</p>
+                <tr>
+                  <td colSpan={5}>Input:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -156,7 +155,6 @@ const SelectionSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>23</td>
                   <td>7</td>
@@ -164,7 +162,10 @@ const SelectionSortPage: FC = () => {
                   <td>17</td>
                   <td>3</td>
                 </tr>
-                <p>After i=1</p>
+
+                <tr>
+                  <td colSpan={5}>After i=1:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -172,7 +173,6 @@ const SelectionSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>7</td>
                   <td>23</td>
@@ -180,7 +180,10 @@ const SelectionSortPage: FC = () => {
                   <td>17</td>
                   <td>3</td>
                 </tr>
-                <p>After i=2</p>
+
+                <tr>
+                  <td colSpan={5}>After i=2:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -188,7 +191,6 @@ const SelectionSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>7</td>
                   <td>10</td>
@@ -196,7 +198,10 @@ const SelectionSortPage: FC = () => {
                   <td>17</td>
                   <td>3</td>
                 </tr>
-                <p>After i=3</p>
+
+                <tr>
+                  <td colSpan={5}>After i=3:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -204,7 +209,6 @@ const SelectionSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>7</td>
                   <td>10</td>
@@ -212,7 +216,10 @@ const SelectionSortPage: FC = () => {
                   <td>23</td>
                   <td>3</td>
                 </tr>
-                <p>After i=4</p>
+
+                <tr>
+                  <td colSpan={5}>After i=4:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -220,7 +227,6 @@ const SelectionSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>3</td>
                   <td>7</td>
@@ -243,8 +249,6 @@ const SelectionSortPage: FC = () => {
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
-            showSortingSteps={showSortingSteps}
-            setShowSortingSteps={setShowSortingSteps}
             setCollection={setSortedNumbers}
             displayMessage={displayMessage}
             defaultAlgorithmName={
@@ -265,7 +269,8 @@ const SelectionSortPage: FC = () => {
               This will be the result of the sorting operations
             </p>
             <div
-              className="array-display__steps"
+              className="array-display__steps alert alert-primary"
+              role="alert"
               id="sortingSteps"
               ref={sortingStepsRef}
             >

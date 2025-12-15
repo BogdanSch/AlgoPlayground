@@ -26,7 +26,6 @@ const MergeSortPage = () => {
     number[]
   >([]);
 
-  const [showSortingSteps, setShowSortingSteps] = useState<boolean>(true);
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -42,8 +41,6 @@ const MergeSortPage = () => {
     leftArrayActiveIndices?: number[],
     rightArrayActiveIndices?: number[]
   ): void => {
-    if (!showSortingSteps) return;
-
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
 
@@ -151,11 +148,13 @@ const MergeSortPage = () => {
               Elements from both halves are compared and placed back into the
               array in the correct order.
             </p>
-            <h1 id="Table">Example:</h1>
+            <h2 id="Table">Example:</h2>
 
             <table className="table">
               <tbody>
-                <p>Input:</p>
+                <tr>
+                  <td colSpan={5}>Input:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -171,7 +170,9 @@ const MergeSortPage = () => {
                   <td>3</td>
                 </tr>
 
-                <p>Split into halves:</p>
+                <tr>
+                  <td colSpan={5}>Split into halves:</td>
+                </tr>
                 <tr>
                   <td>[23, 7, 10] </td>
                   <td></td>
@@ -180,7 +181,9 @@ const MergeSortPage = () => {
                   <td>[17, 3]</td>
                 </tr>
 
-                <p>Split again:</p>
+                <tr>
+                  <td colSpan={5}>Split again:</td>
+                </tr>
                 <tr>
                   <td>[23]</td>
                   <td>[7, 10] </td>
@@ -189,7 +192,9 @@ const MergeSortPage = () => {
                   <td>[3]</td>
                 </tr>
 
-                <p>Merge sorted subarrays:</p>
+                <tr>
+                  <td colSpan={5}>Merge sorted subarrays:</td>
+                </tr>
                 <tr>
                   <td>[23] + [7, 10] → [7, 10, 23]</td>
                   <td></td>
@@ -198,7 +203,9 @@ const MergeSortPage = () => {
                   <td>[17] + [3] → [3, 17]</td>
                 </tr>
 
-                <p>Final merge:</p>
+                <tr>
+                  <td colSpan={5}>Final merge:</td>
+                </tr>
                 <tr>
                   <td>3</td>
                   <td>7</td>
@@ -222,8 +229,6 @@ const MergeSortPage = () => {
             className="mt-5"
             collection={sourceNumbers}
             setCollection={setSortedNumbers}
-            showSortingSteps={showSortingSteps}
-            setShowSortingSteps={setShowSortingSteps}
             displayMessage={displayMessage}
             setLeftCollection={setLeftCollection}
             setRightCollection={setRightCollection}
@@ -249,7 +254,8 @@ const MergeSortPage = () => {
               This will be the result of the sorting operations
             </p>
             <div
-              className="array-display__steps"
+              className="array-display__steps alert alert-primary"
+              role="alert"
               id="sortingSteps"
               ref={sortingStepsRef}
             >

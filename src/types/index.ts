@@ -16,5 +16,6 @@ export interface DivideAndConquerSortStep extends SortStep {
 export type SortingStepGenerator = {
   displayName: string;
   name: string;
+  path: string;
   method: (numbers: number[]) => SortStep[];
 };

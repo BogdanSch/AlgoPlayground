@@ -20,7 +20,6 @@ export const router = createBrowserRouter([
       { path: "bubble", element: <BubbleSortPage/> },
       { path: "selection", element: <SelectionSortPage/> },
       { path: "insertion", element: <InsertionSortPage/> },
-      // { path: "links", element: <SortingAlgorithms/> },
     ],
   },
 ]);

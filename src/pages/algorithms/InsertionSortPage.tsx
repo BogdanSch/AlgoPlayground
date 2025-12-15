@@ -16,7 +16,6 @@ const InsertionSortPage: FC = () => {
   const [rightActiveIndices, setRightActiveIndices] = useState<number[]>([]);
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
 
-  const [showSortingSteps, setShowSortingSteps] = useState<boolean>(true);
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -30,8 +29,6 @@ const InsertionSortPage: FC = () => {
     rightActiveIndices: number[],
     highlightIds: string[]
   ): void => {
-    if (!showSortingSteps) return;
-
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
 
@@ -163,10 +160,12 @@ const InsertionSortPage: FC = () => {
             </p>
             <p>The sorted part now contains one more element.</p>
 
-            <h1 id="Table">Example:</h1>
+            <h2 id="Table">Example:</h2>
             <table className="table">
               <tbody>
-                <p>Input:</p>
+                <tr>
+                  <td colSpan={5}>Input:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -182,7 +181,9 @@ const InsertionSortPage: FC = () => {
                   <td>3</td>
                 </tr>
 
-                <p>After i = 1</p>
+                <tr>
+                  <td colSpan={5}>After i = 1:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -198,7 +199,9 @@ const InsertionSortPage: FC = () => {
                   <td>3</td>
                 </tr>
 
-                <p>After i = 2</p>
+                <tr>
+                  <td colSpan={5}>After i = 2:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -214,7 +217,9 @@ const InsertionSortPage: FC = () => {
                   <td>3</td>
                 </tr>
 
-                <p>After i = 3</p>
+                <tr>
+                  <td colSpan={5}>After i = 3:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -230,7 +235,9 @@ const InsertionSortPage: FC = () => {
                   <td>3</td>
                 </tr>
 
-                <p>After i = 4</p>
+                <tr>
+                  <td colSpan={5}>After i = 4:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -260,8 +267,6 @@ const InsertionSortPage: FC = () => {
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
-            showSortingSteps={showSortingSteps}
-            setShowSortingSteps={setShowSortingSteps}
             setCollection={setSortedNumbers}
             displayMessage={displayMessage}
             defaultAlgorithmName={
@@ -282,7 +287,8 @@ const InsertionSortPage: FC = () => {
               This will be the result of the sorting operations
             </p>
             <div
-              className="array-display__steps"
+              className="array-display__steps alert alert-primary"
+              role="alert"
               id="sortingSteps"
               ref={sortingStepsRef}
             >

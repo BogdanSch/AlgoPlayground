@@ -22,8 +22,6 @@ interface ISortingAlgorithmSelectionFormProps {
   setCollection: Dispatch<SetStateAction<number[]>>;
   setLeftCollection?: Dispatch<SetStateAction<number[]>>;
   setRightCollection?: Dispatch<SetStateAction<number[]>>;
-  showSortingSteps: boolean;
-  setShowSortingSteps: Dispatch<SetStateAction<boolean>>;
   displayMessage: (
     message: string,
     leftActiveIndices: number[],
@@ -43,8 +41,6 @@ const SortingAlgorithmSelectionForm: FC<
   setLeftCollection,
   setRightCollection,
   displayMessage,
-  showSortingSteps = false,
-  setShowSortingSteps,
   defaultAlgorithmName,
 }) => {
   const [steps, setSteps] = useState<SortStep[]>([]);
@@ -67,11 +63,6 @@ const SortingAlgorithmSelectionForm: FC<
     if (!targetSortingMethod) navigate("/");
   }, [defaultAlgorithmName]);
 
-  const handleShowSortingStepsChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setShowSortingSteps(event.target.checked);
-  };
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedMethodName: string = isNullOrWhitespace(defaultAlgorithmName)
       ? event.target.value
@@ -93,13 +84,8 @@ const SortingAlgorithmSelectionForm: FC<
       const newSteps: SortStep[] = targetSortingMethod.method(collectionCopy);
       setSteps(newSteps);
 
-      if (!showSortingSteps) {
-        displayMessage("Sorting's completed!", [], [], []);
-        setCollection(newSteps[newSteps.length - 1].newArray);
-      } else {
-        setCollection(newSteps[0].newArray);
-        displayMessage(newSteps[0].message, [], [], newSteps[0].highlightIds);
-      }
+      setCollection(newSteps[0].newArray);
+      displayMessage(newSteps[0].message, [], [], newSteps[0].highlightIds);
     }
   };
   function isDivideAndConquerStep(
@@ -189,10 +175,13 @@ const SortingAlgorithmSelectionForm: FC<
   return (
     <form className={"sorting-form" + (className ? ` ${className}` : "")}>
       <div className="mb-3">
-        <label className="form-label">Select your sortings algorithm:</label>
+        <label className="form-label" htmlFor="algorithmsSelector">
+          Select your sortings algorithm:
+        </label>
         <select
           className="form-select"
           name="algorithmsSelector"
+          id="algorithmsSelector"
           aria-label="Select numbers array sorting algorithm"
           onChange={handleChange}
           defaultValue={""}
@@ -209,33 +198,29 @@ const SortingAlgorithmSelectionForm: FC<
             </option>
           ))}
         </select>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            name="showSortingSteps"
-            id="showSortingSteps"
-            checked={showSortingSteps}
-            onChange={handleShowSortingStepsChange}
-          />
-          <label className="form-check-label" htmlFor="showSortingSteps">
-            Show sorting steps
-          </label>
-        </div>
-        <div className="mb-3">
+        <div className="buttons mt-3">
           <button
             type="button"
-            className="btn btn-danger"
+            className="btn btn-info"
             onClick={getPreviousStep}
           >
-            Previous
+            <div className="btn__wrap">
+              <i className="bi bi-caret-left-fill"></i>
+            </div>
           </button>
+          {steps.length >= 1 && (
+            <span className="text">
+              {currentStep + 1} / {steps.length}
+            </span>
+          )}
           <button
             type="button"
             className="btn btn-primary"
             onClick={getNextStep}
           >
-            Next
+            <div className="btn__wrap">
+              <i className="bi bi-caret-right-fill"></i>
+            </div>
           </button>
         </div>
       </div>

@@ -1,19 +1,65 @@
 import { type FC } from "react";
+import { Link } from "react-router-dom";
+import { sortingStepGeneratorsTable } from "../utils";
 
 const Homepage: FC = () => {
   return (
-    <section className="app">
-      <div className="container">
-        <div className="app__wrap">
-          <div className="text-content text-center">
-            <h1 className="app__title">Algo Playground</h1>
-            <p className="app__description">
-              Explore and visualize various sorting algorithms in action!
-            </p>
+    <>
+      <section className="app">
+        <div className="container">
+          <div className="app__wrap">
+            <div className="text-content text-center">
+              <h1 className="app__title">Algo Playground</h1>
+              <p className="app__description">
+                Explore and visualize various algorithms in action.
+              </p>
+              <p className="app__description">
+                We don't want you to learn them by heart. We want you to
+                understand them.
+              </p>
+              <a className="btn btn-primary" href={`#sorting`}>
+                <div className="btn__wrap">
+                  <i className="bi bi-search"></i>
+                  Check out
+                </div>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <section className="sorting" id="sorting">
+        <div className="container">
+          <div className="sorting__wrap">
+            <div className="text-content text-center">
+              <h2 className="app__title">Array Sorting Algorithms</h2>
+              <p className="app__description">
+                Explore and visualize various sorting algorithms.
+              </p>
+            </div>
+            <ul className="sorting__list">
+              {sortingStepGeneratorsTable.map((ssg, index) => {
+                return (
+                  <li className="sorting__item" key={`sort-${index}`}>
+                    <div className="card sorting__item-card">
+                      <div className="card-body">
+                        <h5 className="card-title">{ssg.displayName}</h5>
+                        <p className="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                        <Link to={ssg.path} className="btn btn-outline-primary">
+                          Check the {ssg.displayName}
+                        </Link>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

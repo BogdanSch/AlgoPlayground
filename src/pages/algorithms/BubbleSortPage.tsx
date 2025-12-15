@@ -16,7 +16,6 @@ const BubbleSortPage: FC = () => {
   const [rightActiveIndices, setRightActiveIndices] = useState<number[]>([]);
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
 
-  const [showSortingSteps, setShowSortingSteps] = useState<boolean>(true);
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -30,8 +29,6 @@ const BubbleSortPage: FC = () => {
     rightActiveIndices: number[],
     highlightIds: string[]
   ): void => {
-    if (!showSortingSteps) return;
-
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
 
@@ -128,11 +125,12 @@ const BubbleSortPage: FC = () => {
               If the left element is bigger than the right one, they must be
               swapped
             </li>
-
             <h2 id="Table"> Example:</h2>
             <table className="table">
               <tbody>
-                <p>Input:</p>
+                <tr>
+                  <td colSpan={5}>Input:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -140,7 +138,6 @@ const BubbleSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>23</td>
                   <td>7</td>
@@ -148,7 +145,9 @@ const BubbleSortPage: FC = () => {
                   <td>17</td>
                   <td>3</td>
                 </tr>
-                <p>After i=0</p>
+                <tr>
+                  <td colSpan={5}>After i=0:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -156,7 +155,6 @@ const BubbleSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>7</td>
                   <td>10</td>
@@ -164,7 +162,9 @@ const BubbleSortPage: FC = () => {
                   <td>3</td>
                   <td>23</td>
                 </tr>
-                <p>After i=1</p>
+                <tr>
+                  <td colSpan={5}>After i=1:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -172,7 +172,6 @@ const BubbleSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>7</td>
                   <td>10</td>
@@ -180,7 +179,9 @@ const BubbleSortPage: FC = () => {
                   <td>17</td>
                   <td>23</td>
                 </tr>
-                <p>After i=2</p>
+                <tr>
+                  <td colSpan={5}>After i=2:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -188,7 +189,6 @@ const BubbleSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>7</td>
                   <td>3</td>
@@ -196,7 +196,9 @@ const BubbleSortPage: FC = () => {
                   <td>17</td>
                   <td>23</td>
                 </tr>
-                <p>After i=3</p>
+                <tr>
+                  <td colSpan={5}>After i=3:</td>
+                </tr>
                 <tr>
                   <td>0</td>
                   <td>1</td>
@@ -204,7 +206,6 @@ const BubbleSortPage: FC = () => {
                   <td>3</td>
                   <td>4</td>
                 </tr>
-
                 <tr>
                   <td>3</td>
                   <td>7</td>
@@ -227,13 +228,11 @@ const BubbleSortPage: FC = () => {
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
-            showSortingSteps={showSortingSteps}
-            setShowSortingSteps={setShowSortingSteps}
             setCollection={setSortedNumbers}
             displayMessage={displayMessage}
             defaultAlgorithmName={
               sortingStepGeneratorsTable.find(
-                (stg) => stg.displayName === "Bubble Sort"
+                (ssg) => ssg.displayName === "Bubble Sort"
               )?.name
             }
           />
@@ -249,7 +248,8 @@ const BubbleSortPage: FC = () => {
               This will be the result of the sorting operations
             </p>
             <div
-              className="array-display__steps"
+              className="array-display__steps alert alert-primary"
+              role="alert"
               id="sortingSteps"
               ref={sortingStepsRef}
             >
