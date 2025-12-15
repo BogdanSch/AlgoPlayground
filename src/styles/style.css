@@ -8,9 +8,9 @@
   --yellow: #cdee10;
   --dark: #111111;
   --blue: #1160d8;
-  --purple: #AF40FF ;
-  --violet: #5B42F3;
-  --cyan: #00DDEB;
+  --purple: #af40ff;
+  --violet: #5b42f3;
+  --cyan: #00ddeb;
 
   --dark-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
@@ -30,6 +30,9 @@ body {
 }
 .main {
   flex: 1;
+}
+mark.text-bold {
+  font-weight: var(--fw-bold);
 }
 /* header - Start */
 .header {
@@ -183,32 +186,39 @@ td {
   transform: scale(1.5);
 }
 
-  #content {
-    display: flex;
-    flex-direction: row;
-  }
+#content {
+  display: flex;
+  flex-direction: row;
+}
 .CodeExp {
-    background-color: lightcyan;
-    border: 2px;
-  }
-  .LinkText {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
+  background-color: lightcyan;
+  border: 2px;
+}
+.LinkText {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 
 .Download {
-  background-image: linear-gradient(var(--light), var(--purple), var(--violet), var(--light));
+  background-image: linear-gradient(
+    var(--light),
+    var(--purple),
+    var(--violet),
+    var(--light)
+  );
   border-radius: 8px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: Phantomsans, sans-serif;
   font-size: 20px;
   margin-left: 10px;
   padding: 3px;
   text-decoration: none;
-
 }
-  /* app - Start */
+/* app - Start */
 .app {
   margin-top: 5.75rem;
+}
+.app__image {
+  width: 56%;
 }
 /* sorting - Start */
 .sorting {
