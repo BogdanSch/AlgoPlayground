@@ -6,6 +6,11 @@
   --yellow: #cdee10;
   --dark: #111111;
   --blue: #1160d8;
+  --purple: #AF40FF ;
+  --violet: #5B42F3;
+  --cyan: #00DDEB;
+
+ 
 
   --fw-normal: 500;
   --fw-bold: 700;
@@ -99,14 +104,7 @@ body {
   .navigation:hover {
     transform: scale(1.5); 
   }
-  nav {
-      background-color : var(--grey);
-      position: fixed;
-      font-size: 25px;
-      padding: 10px;
-      margin-left: 10px;
-      top: 50%;
-  }
+
 
   #content {
     display: flex;
@@ -114,5 +112,25 @@ body {
     /* align-items: center; */
   }
   .CodeExp {
-    
+    background-color: lightcyan;
+    border: 2px;
   }
+  .LinkText {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+
+.Download {
+  background-image: linear-gradient(var(--light), var(--purple), var(--violet), var(--light));
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  margin-left: 10px;
+  padding: 3px;
+  text-decoration: none;
+
+}
+
+
+

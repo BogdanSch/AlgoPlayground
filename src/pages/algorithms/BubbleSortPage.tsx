@@ -46,16 +46,6 @@ const BubbleSortPage: FC = () => {
       <div className="container">
         <div className="array-sort__wrap">
           <article className="array-sort__article">
-            <nav>
-              <a
-                className="Download"
-                href="/pythonCode/bubblesort.py"
-                download={true}
-              >
-                {" "}
-                asdasd
-              </a>
-            </nav>
             <h1 className="heading">Bubble Sort</h1>
             <p className="text">
               Bubble sort is a very simple algorithm that repeatedly swaps
@@ -67,6 +57,27 @@ const BubbleSortPage: FC = () => {
             <h3>Pseudocode:</h3>
             <img src={pseudocodeBubble} alt="pseudo"></img>
             <p> </p>
+            <nav>
+              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <a
+                className="Download"
+                href="/pythonCode/bubblesort.py"
+                download={true}
+              >
+                {" "}
+                Python
+          
+              </a>
+                    <a
+                className="Download"
+                href="/pythonCode/bubblesort.js"
+                download={true}
+              >
+                {" "}
+                Javascript
+              </a>
+            </nav>
+            <p></p>
             <h2>Code explanation:</h2>
             <p> </p>
             <h3>Important variables</h3>

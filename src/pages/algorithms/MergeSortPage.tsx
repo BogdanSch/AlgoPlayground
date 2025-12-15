@@ -71,6 +71,26 @@ const MergeSortPage = () => {
             </p>
             <h3>PseudoCode:</h3>
             <img src={pseudocodeMerge} alt="pseudo"></img>
+            <p></p>
+            <nav>
+              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <a
+                className="Download"
+                href="/pythonCode/mergesort.py"
+                download={true}
+              >
+                {" "}
+                Python
+              </a>
+                    <a
+                className="Download"
+                href="/javaCode/mergesort.js"
+                download={true}
+              >
+                {" "}
+                Javascript
+              </a>
+              </nav>
             <h3>Important variables</h3>
             <ul>
               <li>

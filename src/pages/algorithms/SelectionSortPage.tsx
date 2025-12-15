@@ -54,6 +54,26 @@ const SelectionSortPage: FC = () => {
             </p>
             <h2>Pseudocode:</h2>
             <img src={pseudocodeSelection} alt="pseudo"></img>
+            <p></p>
+            <nav>
+              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <a
+                className="Download"
+                href="/pythonCode/selectionsort.py"
+                download={true}
+              >
+                {" "}
+                Python
+              </a>
+                    <a
+                className="Download"
+                href="/javaCode/selectionsort.js"
+                download={true}
+              >
+                {" "}
+                Javascript
+              </a>
+            </nav>
             <h2>Explanation:</h2>
             <ul>
               <li>
@@ -80,7 +100,7 @@ const SelectionSortPage: FC = () => {
               because the last element will automatically be in the correct
               place.
             </p>
-            <h3>
+            <h3 className="CodeExp">
               Set the first unsorted element index as the <code>min</code>
             </h3>
             <p>The array can be split into two parts:</p>
@@ -97,12 +117,14 @@ const SelectionSortPage: FC = () => {
             </p>
 
             <h3>Loop through the unsorted elements</h3>
-            <p>
+            <p className="CodeExp">
               <code>for each of the unsorted elements:</code>
             </p>
+            <p className="CodeExp">
             <code>
               if element &lt; currentMin: set element's index as new min
             </code>
+            </p>
             <p>
               You check every element after the current position. If you find a
               number smaller than the number at <code>min</code>, you update{" "}
@@ -110,8 +132,8 @@ const SelectionSortPage: FC = () => {
               the remaining unsorted part.
             </p>
 
-            <h3>
-              4. Swap the element at <code>min</code> with the first unsorted
+            <h3 className="CodeExp">
+              Swap the element at <code>min</code> with the first unsorted
               position
             </h3>
             <p>

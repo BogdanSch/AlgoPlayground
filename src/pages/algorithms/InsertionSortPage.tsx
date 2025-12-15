@@ -55,6 +55,26 @@ const InsertionSortPage: FC = () => {
             </p>
             <h3>PseudoCode:</h3>
             <img src={pseudocodeInsertion} alt="pseudo"></img>
+            <p> </p>
+                        <nav>
+              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <a
+                className="Download"
+                href="/pythonCode/insertionsort.py"
+                download={true}
+              >
+                {" "}
+                Python
+              </a>
+                    <a
+                className="Download"
+                href="/javaCode/insertionsort.js"
+                download={true}
+              >
+                {" "}
+                Javascript
+              </a>
+            </nav>
             <h3>Important variables</h3>
             <ul>
               <li>
