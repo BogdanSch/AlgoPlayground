@@ -1,16 +1,24 @@
-def bubbleSort(arr):
-                    for i in range(len(arr)):
-                            
-                        flag = True
-                        for j in range(0, len(arr) - i - 1):
+import time
+import random
 
-                            if arr[j] > arr[j + 1]:
-                                (arr[j], arr[j + 1]) = (arr[j + 1], arr[j])
-                                flag = False
-                                    
-                          if flag:
-                            break
-                    arr = [2, 45, 0, 11, 9]
-                    bubbleSort(arr)
-                    print('Sorted array:')
-                    print(arr)
+def bubbleSort(numbers: list[int]) -> None:
+    n: int = len(numbers)
+    for i in range(n - 1):
+        swapped: bool = False
+        for j in range(n - i - 1):
+            if numbers[j] > numbers[j + 1]:
+                numbers[j], numbers[j + 1] = numbers[j + 1], numbers[j]
+                swapped = True
+        if not swapped:
+            break
+
+
+amount = 10000
+#Number of elements (You can change this to see how long it take to completely sort the array)
+arr = [random.randint(1, 1000) for i in range(amount)]
+start = time.time()
+bubbleSort(arr)
+end = time.time()
+
+print(arr)
+print(f"Time taken: {end - start:.6f} seconds")
