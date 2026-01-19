@@ -39,7 +39,7 @@ const MergeSortPage = () => {
     rightActiveIndices: number[],
     highlightIds: string[],
     leftArrayActiveIndices?: number[],
-    rightArrayActiveIndices?: number[]
+    rightArrayActiveIndices?: number[],
   ): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
@@ -70,7 +70,10 @@ const MergeSortPage = () => {
             <img src={pseudocodeMerge} alt="pseudo"></img>
             <p></p>
             <nav>
-              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <p className="LinkText">
+                If you want to see how fast different languages sort download
+                these codes:
+              </p>
               <a
                 className="Download"
                 href="/pythonCode/mergesort.py"
@@ -79,7 +82,7 @@ const MergeSortPage = () => {
                 {" "}
                 Python
               </a>
-                    <a
+              <a
                 className="Download"
                 href="/javaCode/mergesort.js"
                 download={true}
@@ -87,7 +90,7 @@ const MergeSortPage = () => {
                 {" "}
                 Javascript
               </a>
-              </nav>
+            </nav>
             <h3>Important variables</h3>
             <ul>
               <li>
@@ -224,7 +227,7 @@ const MergeSortPage = () => {
             <h2 className="title">Row data</h2>
             <p className="text">This is your original array.</p>
           </ArrayDisplay>
-          <MergeSortTemplate highlightIds={highlightIds} />
+          <MergeSortTemplate className="mt-5" highlightIds={highlightIds} />
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
@@ -234,7 +237,7 @@ const MergeSortPage = () => {
             setRightCollection={setRightCollection}
             defaultAlgorithmName={
               sortingStepGeneratorsTable.find(
-                (stg) => stg.displayName === "Merge Sort"
+                (stg) => stg.displayName === "Merge Sort",
               )?.name
             }
           />

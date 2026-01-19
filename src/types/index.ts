@@ -19,3 +19,8 @@ export type SortingStepGenerator = {
   path: string;
   method: (numbers: number[]) => SortStep[];
 };
+
+export interface ISortTemplateProps {
+  className?: string;
+  highlightIds: string[];
+}

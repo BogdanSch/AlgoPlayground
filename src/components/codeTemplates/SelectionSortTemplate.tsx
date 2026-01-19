@@ -1,10 +1,9 @@
 import type { FC } from "react";
+import { isNullOrWhitespace } from "../../utils/stringHelper";
+import type { ISortTemplateProps } from "../../types";
 
-interface ISelectionSortTemplateProps {
-  highlightIds: string[];
-}
-
-const SelectionSortTemplate: FC<ISelectionSortTemplateProps> = ({
+const SelectionSortTemplate: FC<ISortTemplateProps> = ({
+  className,
   highlightIds,
 }) => {
   const selectionCode = [
@@ -28,7 +27,9 @@ const SelectionSortTemplate: FC<ISelectionSortTemplateProps> = ({
   ];
 
   return (
-    <pre className="code-block">
+    <pre
+      className={`code-block${isNullOrWhitespace(className) ? "" : ` ${className}`}`}
+    >
       {selectionCode.map((line, index) => {
         const isHighlighted = line.id && highlightIds.includes(line.id);
         return (

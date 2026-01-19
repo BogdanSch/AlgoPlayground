@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header: FC = () => {
   return (
-    <header className="header  py-3">
+    <header className="header py-3">
       <div className="container">
         <div className="header__wrap">
           <nav className="header__nav nav nav-pills">

@@ -1,10 +1,9 @@
 import type { FC } from "react";
+import { isNullOrWhitespace } from "../../utils/stringHelper";
+import type { ISortTemplateProps } from "../../types";
 
-interface IInsertionSortTemplateProps {
-  highlightIds: string[];
-}
-
-const InsertionSortTemplate: FC<IInsertionSortTemplateProps> = ({
+const InsertionSortTemplate: FC<ISortTemplateProps> = ({
+  className,
   highlightIds,
 }) => {
   const insertionCode = [
@@ -28,7 +27,9 @@ const InsertionSortTemplate: FC<IInsertionSortTemplateProps> = ({
   ];
 
   return (
-    <pre className="code-block">
+    <pre
+      className={`code-block${isNullOrWhitespace(className) ? "" : ` ${className}`}`}
+    >
       {insertionCode.map((line, index) => {
         const isHighlighted = line.id && highlightIds.includes(line.id);
         return (

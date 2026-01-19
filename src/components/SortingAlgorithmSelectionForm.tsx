@@ -28,7 +28,7 @@ interface ISortingAlgorithmSelectionFormProps {
     rightActiveIndices: number[],
     highlightIds: string[],
     rightArrayActiveIndices?: number[],
-    leftArrayActiveIndices?: number[]
+    leftArrayActiveIndices?: number[],
   ) => void;
 }
 
@@ -47,30 +47,29 @@ const SortingAlgorithmSelectionForm: FC<
   const [currentStep, setCurrentStep] = useState<number>(0);
   const navigate = useNavigate();
   const filteredSortingStepGeneratorsTable = isNullOrWhitespace(
-    defaultAlgorithmName
+    defaultAlgorithmName,
   )
     ? sortingStepGeneratorsTable
     : sortingStepGeneratorsTable.filter(
-        (ssg) => ssg.name === defaultAlgorithmName
+        (ssg) => ssg.name === defaultAlgorithmName,
       );
 
   useEffect(() => {
-    if (isNullOrWhitespace(defaultAlgorithmName)) return;
+    if (isNullOrWhitespace(defaultAlgorithmName) || collection.length <= 0)
+      return;
+
     const targetSortingMethod: SortingStepGenerator | undefined =
-      sortingStepGeneratorsTable.find(
-        (ssg) => ssg.name === defaultAlgorithmName
+      filteredSortingStepGeneratorsTable.find(
+        (ssg) => ssg.name === defaultAlgorithmName,
       );
     if (!targetSortingMethod) navigate("/");
-  }, [defaultAlgorithmName]);
 
-  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedMethodName: string = isNullOrWhitespace(defaultAlgorithmName)
-      ? event.target.value
-      : defaultAlgorithmName!;
-    console.log(selectedMethodName);
+    startSorting(defaultAlgorithmName!);
+  }, [defaultAlgorithmName, collection]);
 
+  const startSorting = (methodName: string) => {
     const targetSortingMethod: SortingStepGenerator | undefined =
-      sortingStepGeneratorsTable.find((ssg) => ssg.name === selectedMethodName);
+      sortingStepGeneratorsTable.find((ssg) => ssg.name === methodName);
 
     if (targetSortingMethod) {
       const sortedArrayDisplay: HTMLElement | null =
@@ -88,8 +87,13 @@ const SortingAlgorithmSelectionForm: FC<
       displayMessage(newSteps[0].message, [], [], newSteps[0].highlightIds);
     }
   };
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedMethodName: string = event.target.value;
+    console.log(selectedMethodName);
+    startSorting(selectedMethodName);
+  };
   function isDivideAndConquerStep(
-    step: SortStep
+    step: SortStep,
   ): step is DivideAndConquerSortStep {
     return (
       "newLeftArrayHalf" in step &&
@@ -108,7 +112,7 @@ const SortingAlgorithmSelectionForm: FC<
         "Sorting's completed!",
         [],
         [],
-        steps[steps.length - 1].highlightIds
+        steps[steps.length - 1].highlightIds,
       );
       return;
     }
@@ -124,14 +128,14 @@ const SortingAlgorithmSelectionForm: FC<
         step.rightActiveIndices,
         step.highlightIds,
         step.leftArrayActiveIndices,
-        step.rightArrayActiveIndices
+        step.rightArrayActiveIndices,
       );
     } else {
       displayMessage(
         step.message,
         step.leftActiveIndices,
         step.rightActiveIndices,
-        step.highlightIds
+        step.highlightIds,
       );
     }
 
@@ -159,14 +163,14 @@ const SortingAlgorithmSelectionForm: FC<
         step.rightActiveIndices,
         step.highlightIds,
         step.leftArrayActiveIndices,
-        step.rightArrayActiveIndices
+        step.rightArrayActiveIndices,
       );
     } else {
       displayMessage(
         step.message,
         step.leftActiveIndices,
         step.rightActiveIndices,
-        step.highlightIds
+        step.highlightIds,
       );
     }
     setCurrentStep(currentStep - 1);
@@ -184,7 +188,7 @@ const SortingAlgorithmSelectionForm: FC<
           id="algorithmsSelector"
           aria-label="Select numbers array sorting algorithm"
           onChange={handleChange}
-          defaultValue={""}
+          defaultValue={defaultAlgorithmName ?? ""}
         >
           <option value="" disabled={true}>
             Select a sorting algorithm

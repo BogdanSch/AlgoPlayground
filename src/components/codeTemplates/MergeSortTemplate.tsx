@@ -1,10 +1,11 @@
 import type { FC } from "react";
+import { isNullOrWhitespace } from "../../utils/stringHelper";
+import type { ISortTemplateProps } from "../../types";
 
-interface IMergeSortTemplateProps {
-  highlightIds: string[];
-}
-
-const MergeSortTemplate: FC<IMergeSortTemplateProps> = ({ highlightIds }) => {
+const MergeSortTemplate: FC<ISortTemplateProps> = ({
+  className,
+  highlightIds,
+}) => {
   const mergeSortCode = [
     { text: "def mergeSort(numbers: list[int]) -> None:", id: "start" },
     { text: "    n = len(numbers)" },
@@ -61,7 +62,9 @@ const MergeSortTemplate: FC<IMergeSortTemplateProps> = ({ highlightIds }) => {
   ];
 
   return (
-    <pre className="code-block">
+    <pre
+      className={`code-block${isNullOrWhitespace(className) ? "" : ` ${className}`}`}
+    >
       {mergeSortCode.map((line, index) => {
         const isHighlighted = line.id && highlightIds.includes(line.id);
         return (

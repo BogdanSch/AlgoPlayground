@@ -27,7 +27,7 @@ const InsertionSortPage: FC = () => {
     message: string,
     leftActiveIndices: number[],
     rightActiveIndices: number[],
-    highlightIds: string[]
+    highlightIds: string[],
   ): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
@@ -53,8 +53,11 @@ const InsertionSortPage: FC = () => {
             <h3>PseudoCode:</h3>
             <img src={pseudocodeInsertion} alt="pseudo"></img>
             <p> </p>
-                        <nav>
-              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+            <nav>
+              <p className="LinkText">
+                If you want to see how fast different languages sort download
+                these codes:
+              </p>
               <a
                 className="Download"
                 href="/pythonCode/insertionsort.py"
@@ -63,7 +66,7 @@ const InsertionSortPage: FC = () => {
                 {" "}
                 Python
               </a>
-                    <a
+              <a
                 className="Download"
                 href="/javaCode/insertionsort.js"
                 download={true}
@@ -263,7 +266,7 @@ const InsertionSortPage: FC = () => {
             <h2 className="title">Row data</h2>
             <p className="text">This is your original array.</p>
           </ArrayDisplay>
-          <InsertionSortTemplate highlightIds={highlightIds} />
+          <InsertionSortTemplate className="mt-5" highlightIds={highlightIds} />
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
@@ -271,7 +274,7 @@ const InsertionSortPage: FC = () => {
             displayMessage={displayMessage}
             defaultAlgorithmName={
               sortingStepGeneratorsTable.find(
-                (stg) => stg.displayName === "Insertion Sort"
+                (stg) => stg.displayName === "Insertion Sort",
               )?.name
             }
           />

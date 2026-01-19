@@ -27,7 +27,7 @@ const SelectionSortPage: FC = () => {
     message: string,
     leftActiveIndices: number[],
     rightActiveIndices: number[],
-    highlightIds: string[]
+    highlightIds: string[],
   ): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
@@ -53,7 +53,10 @@ const SelectionSortPage: FC = () => {
             <img src={pseudocodeSelection} alt="pseudo"></img>
             <p></p>
             <nav>
-              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <p className="LinkText">
+                If you want to see how fast different languages sort download
+                these codes:
+              </p>
               <a
                 className="Download"
                 href="/pythonCode/selectionsort.py"
@@ -62,7 +65,7 @@ const SelectionSortPage: FC = () => {
                 {" "}
                 Python
               </a>
-                    <a
+              <a
                 className="Download"
                 href="/javaCode/selectionsort.js"
                 download={true}
@@ -118,9 +121,9 @@ const SelectionSortPage: FC = () => {
               <code>for each of the unsorted elements:</code>
             </p>
             <p className="CodeExp">
-            <code>
-              if element &lt; currentMin: set element's index as new min
-            </code>
+              <code>
+                if element &lt; currentMin: set element's index as new min
+              </code>
             </p>
             <p>
               You check every element after the current position. If you find a
@@ -245,7 +248,7 @@ const SelectionSortPage: FC = () => {
             <h2 className="title">Row data</h2>
             <p className="text">This is your original array.</p>
           </ArrayDisplay>
-          <SelectionSortTemplate highlightIds={highlightIds} />
+          <SelectionSortTemplate className="mt-5" highlightIds={highlightIds} />
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
@@ -253,7 +256,7 @@ const SelectionSortPage: FC = () => {
             displayMessage={displayMessage}
             defaultAlgorithmName={
               sortingStepGeneratorsTable.find(
-                (stg) => stg.displayName === "Selection Sort"
+                (stg) => stg.displayName === "Selection Sort",
               )?.name
             }
           />

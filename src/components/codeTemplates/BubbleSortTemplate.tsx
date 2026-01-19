@@ -1,10 +1,11 @@
 import type { FC } from "react";
+import { isNullOrWhitespace } from "../../utils/stringHelper";
+import type { ISortTemplateProps } from "../../types";
 
-interface IBubbleSortTemplateProps {
-  highlightIds: string[];
-}
-
-const BubbleSortTemplate: FC<IBubbleSortTemplateProps> = ({ highlightIds }) => {
+const BubbleSortTemplate: FC<ISortTemplateProps> = ({
+  className,
+  highlightIds,
+}) => {
   const bubbleCode = [
     { text: "def bubbleSort(numbers: list[int]) -> None:", id: "start" },
     { text: "    n: int = len(numbers)" },
@@ -28,7 +29,9 @@ const BubbleSortTemplate: FC<IBubbleSortTemplateProps> = ({ highlightIds }) => {
   ];
 
   return (
-    <pre className="code-block">
+    <pre
+      className={`code-block${isNullOrWhitespace(className) ? "" : ` ${className}`}`}
+    >
       {bubbleCode.map((line, index) => {
         const isHighlighted = line.id && highlightIds.includes(line.id);
         return (

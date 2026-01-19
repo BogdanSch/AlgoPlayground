@@ -3,6 +3,7 @@
 :root {
   --primary: #1160d8;
   --accent: #64748b;
+  --extra-light: #fefefe;
   --light: #f8f7f7;
   --grey: #c7c7c7;
   --yellow: #cdee10;
@@ -26,7 +27,7 @@ body {
   background-color: var(--light);
 }
 .wrapper {
-  overflow: hidden;
+  overflow: clip;
 }
 .main {
   flex: 1;
@@ -36,9 +37,10 @@ mark.text-bold {
 }
 /* header - Start */
 .header {
+  background-color: var(--extra-light);
+  box-shadow: var(--dark-shadow);
   position: sticky;
   top: 0;
-  box-shadow: var(--dark-shadow);
 }
 .header__nav {
   display: flex;
@@ -68,6 +70,8 @@ mark.text-bold {
 /* Sidebar - Start */
 .sidebar {
   margin-top: 40px;
+  position: sticky;
+  top: 0;
 }
 .sidebar__list {
   list-style: none;
@@ -232,3 +236,17 @@ td {
   gap: 0.75rem;
 }
 /* sorting - End */
+/* footer - Start */
+.footer {
+  margin-top: 2.5rem;
+  box-shadow: var(--dark-shadow);
+  background-color: var(--extra-light);
+}
+.footer__wrap {
+  text-align: center;
+  padding: 32px 24px;
+}
+.footer__text {
+  margin-bottom: 0;
+}
+/* footer - End */

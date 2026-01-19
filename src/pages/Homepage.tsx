@@ -2,6 +2,7 @@ import { type FC } from "react";
 import { Link } from "react-router-dom";
 import { sortingStepGeneratorsTable } from "../utils";
 import algorithmsInAction from "../images/algorithmsInAction.gif";
+// https://cdn-images-1.medium.com/max/564/1*qcn0d0W74ZC4duWXwgiTMA.gif
 
 const Homepage: FC = () => {
   return (
@@ -12,8 +13,8 @@ const Homepage: FC = () => {
             <div className="text-content text-center">
               <h1 className="app__title">Algo Playground</h1>
               <img className="app__image" src={algorithmsInAction} />
-              <p className="app__description mt-2">
-                Explore and visualize various algorithms in action.{" "}
+              <p className="app__description mt-2 mb-1">
+                Explore and visualize various algorithms in action.
               </p>
               <p className="app__description">
                 <mark className="text-bold">

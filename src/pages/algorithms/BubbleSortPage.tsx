@@ -27,7 +27,7 @@ const BubbleSortPage: FC = () => {
     message: string,
     leftActiveIndices: number[],
     rightActiveIndices: number[],
-    highlightIds: string[]
+    highlightIds: string[],
   ): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
@@ -49,13 +49,17 @@ const BubbleSortPage: FC = () => {
               adjacent elements if they are not in the correct order. It is easy
               to understand but inefficient compared to other sorting
               algorithms. However, it is important to understand how it works
-              because it helps you better understand more advanced algorithms.{" "}
+              because it helps you better understand more advanced
+              algorithms.{" "}
             </p>
             <h3>Pseudocode:</h3>
             <img src={pseudocodeBubble} alt="pseudo"></img>
             <p> </p>
             <nav>
-              <p className="LinkText">If you want to see how fast different languages sort download these codes:</p>
+              <p className="LinkText">
+                If you want to see how fast different languages sort download
+                these codes:
+              </p>
               <a
                 className="Download"
                 href="/pythonCode/bubblesort.py"
@@ -63,9 +67,8 @@ const BubbleSortPage: FC = () => {
               >
                 {" "}
                 Python
-          
               </a>
-                    <a
+              <a
                 className="Download"
                 href="/pythonCode/bubblesort.js"
                 download={true}
@@ -224,7 +227,7 @@ const BubbleSortPage: FC = () => {
             <h2 className="title">Row data</h2>
             <p className="text">This is your original array.</p>
           </ArrayDisplay>
-          <BubbleSortTemplate highlightIds={highlightIds} />
+          <BubbleSortTemplate className="mt-5" highlightIds={highlightIds} />
           <SortingAlgorithmSelectionForm
             className="mt-5"
             collection={sourceNumbers}
@@ -232,7 +235,7 @@ const BubbleSortPage: FC = () => {
             displayMessage={displayMessage}
             defaultAlgorithmName={
               sortingStepGeneratorsTable.find(
-                (ssg) => ssg.displayName === "Bubble Sort"
+                (ssg) => ssg.displayName === "Bubble Sort",
               )?.name
             }
           />
