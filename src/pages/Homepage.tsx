@@ -22,11 +22,9 @@ const Homepage: FC = () => {
                   actually work.
                 </mark>
               </p>
-              <a className="btn btn-primary" href={`#sorting`}>
-                <div className="btn__wrap">
-                  <i className="bi bi-search"></i>
-                  Check out
-                </div>
+              <a className="btn btn-primary btn-icon" href={`#sorting`}>
+                <i className="bi bi-search"></i>
+                <span>Check out</span>
               </a>
             </div>
           </div>

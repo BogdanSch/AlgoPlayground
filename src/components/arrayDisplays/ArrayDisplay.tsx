@@ -17,7 +17,6 @@ const ArrayDisplay: FC<IArrayDisplayProps> = ({
   children,
   leftActiveIndices,
   rightActiveIndices,
-
 }) => {
   return (
     <div className={`array-display${className ? ` ${className}` : ``}`} id={id}>

@@ -7,13 +7,13 @@ import {
   type SetStateAction,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { sortingStepGeneratorsTable } from "../utils";
 import type {
   SortingStepGenerator,
   SortStep,
   DivideAndConquerSortStep,
-} from "../types";
-import { isNullOrWhitespace } from "../utils/stringHelper";
+} from "../../types";
+import { sortingStepGeneratorsTable } from "../../utils";
+import { isNullOrWhitespace } from "../../utils/stringHelper";
 
 interface ISortingAlgorithmSelectionFormProps {
   className?: string;
@@ -180,7 +180,7 @@ const SortingAlgorithmSelectionForm: FC<
     <form className={"sorting-form" + (className ? ` ${className}` : "")}>
       <div className="mb-3">
         <label className="form-label" htmlFor="algorithmsSelector">
-          Select your sortings algorithm:
+          Sorting algorithm:
         </label>
         <select
           className="form-select"
@@ -205,12 +205,10 @@ const SortingAlgorithmSelectionForm: FC<
         <div className="buttons mt-3">
           <button
             type="button"
-            className="btn btn-info"
+            className="btn btn-info btn-icon"
             onClick={getPreviousStep}
           >
-            <div className="btn__wrap">
-              <i className="bi bi-caret-left-fill"></i>
-            </div>
+            <i className="bi bi-caret-left-fill"></i>
           </button>
           {steps.length >= 1 && (
             <span className="text">
@@ -219,12 +217,10 @@ const SortingAlgorithmSelectionForm: FC<
           )}
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-icon"
             onClick={getNextStep}
           >
-            <div className="btn__wrap">
-              <i className="bi bi-caret-right-fill"></i>
-            </div>
+            <i className="bi bi-caret-right-fill"></i>
           </button>
         </div>
       </div>

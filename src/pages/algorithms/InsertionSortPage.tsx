@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState, type FC } from "react";
+import { useRef, useState, type FC } from "react";
 import {
   ArrayDisplay,
+  ArrayInputForm,
   InsertionSortTemplate,
   SortingAlgorithmSelectionForm,
 } from "../../components";
-import { numbersSequenceGenerator } from "../../utils/numbersGenerators";
 import { sortingStepGeneratorsTable } from "../../utils";
 import pseudocodeInsertion from "../../images/Pseudoinsertion.png";
 
@@ -17,11 +17,6 @@ const InsertionSortPage: FC = () => {
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
 
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const sequence: number[] = numbersSequenceGenerator(10);
-    setSourceNumbers(sequence);
-  }, []);
 
   const displayMessage = (
     message: string,
@@ -258,46 +253,57 @@ const InsertionSortPage: FC = () => {
               </tbody>
             </table>
           </article>
-          <ArrayDisplay
-            className="mt-5"
-            id="sourceArrayDisplay"
-            collection={sourceNumbers}
-          >
-            <h2 className="title">Row data</h2>
-            <p className="text">This is your original array.</p>
-          </ArrayDisplay>
-          <InsertionSortTemplate className="mt-5" highlightIds={highlightIds} />
-          <SortingAlgorithmSelectionForm
-            className="mt-5"
-            collection={sourceNumbers}
-            setCollection={setSortedNumbers}
-            displayMessage={displayMessage}
-            defaultAlgorithmName={
-              sortingStepGeneratorsTable.find(
-                (stg) => stg.displayName === "Insertion Sort",
-              )?.name
-            }
-          />
-          <ArrayDisplay
-            className="mt-5"
-            id="sortedArrayDisplay"
-            collection={sortedNumbers}
-            leftActiveIndices={leftActiveIndices}
-            rightActiveIndices={rightActiveIndices}
-          >
-            <h2 className="title">Sorted data</h2>
-            <p className="text">
-              This will be the result of the sorting operations
-            </p>
-            <div
-              className="array-display__steps alert alert-primary"
-              role="alert"
-              id="sortingSteps"
-              ref={sortingStepsRef}
-            >
-              Start by selecting one of the methods
-            </div>
-          </ArrayDisplay>
+          <div className="array-sort__visualization">
+            {sourceNumbers.length <= 0 ? (
+              <ArrayInputForm setCollection={setSourceNumbers} />
+            ) : (
+              <>
+                <ArrayDisplay
+                  className="mt-5"
+                  id="sourceArrayDisplay"
+                  collection={sourceNumbers}
+                >
+                  <h2 className="title">Row data</h2>
+                  <p className="text">This is your original array.</p>
+                </ArrayDisplay>
+                <InsertionSortTemplate
+                  className="mt-5"
+                  highlightIds={highlightIds}
+                />
+                <SortingAlgorithmSelectionForm
+                  className="mt-5"
+                  collection={sourceNumbers}
+                  setCollection={setSortedNumbers}
+                  displayMessage={displayMessage}
+                  defaultAlgorithmName={
+                    sortingStepGeneratorsTable.find(
+                      (stg) => stg.displayName === "Insertion Sort",
+                    )?.name
+                  }
+                />
+                <ArrayDisplay
+                  className="mt-5"
+                  id="sortedArrayDisplay"
+                  collection={sortedNumbers}
+                  leftActiveIndices={leftActiveIndices}
+                  rightActiveIndices={rightActiveIndices}
+                >
+                  <h2 className="title">Sorted data</h2>
+                  <p className="text">
+                    This will be the result of the sorting operations
+                  </p>
+                  <div
+                    className="array-display__steps alert alert-primary"
+                    role="alert"
+                    id="sortingSteps"
+                    ref={sortingStepsRef}
+                  >
+                    Start by selecting one of the methods
+                  </div>
+                </ArrayDisplay>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </section>

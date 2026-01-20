@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrayDisplay,
   MergeSortTemplate,
   SortingAlgorithmSelectionForm,
   RecursiveTreeArrayDisplay,
+  ArrayInputForm,
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
-import { numbersSequenceGenerator } from "../../utils/numbersGenerators";
 import pseudocodeMerge from "../../images/Pseudomerge.png";
 
 const MergeSortPage = () => {
@@ -25,13 +25,7 @@ const MergeSortPage = () => {
   const [rightArrayActiveIndices, setRightArrayActiveIndices] = useState<
     number[]
   >([]);
-
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const sequence: number[] = numbersSequenceGenerator(10);
-    setSourceNumbers(sequence);
-  }, []);
 
   const displayMessage = (
     message: string,
@@ -219,52 +213,63 @@ const MergeSortPage = () => {
               </tbody>
             </table>
           </article>
-          <ArrayDisplay
-            className="mt-5"
-            id="sourceArrayDisplay"
-            collection={sourceNumbers}
-          >
-            <h2 className="title">Row data</h2>
-            <p className="text">This is your original array.</p>
-          </ArrayDisplay>
-          <MergeSortTemplate className="mt-5" highlightIds={highlightIds} />
-          <SortingAlgorithmSelectionForm
-            className="mt-5"
-            collection={sourceNumbers}
-            setCollection={setSortedNumbers}
-            displayMessage={displayMessage}
-            setLeftCollection={setLeftCollection}
-            setRightCollection={setRightCollection}
-            defaultAlgorithmName={
-              sortingStepGeneratorsTable.find(
-                (stg) => stg.displayName === "Merge Sort",
-              )?.name
-            }
-          />
-          <RecursiveTreeArrayDisplay
-            className="mt-5"
-            id="sortedArrayDisplay"
-            collection={sortedNumbers}
-            leftActiveIndices={leftActiveIndices}
-            rightActiveIndices={rightActiveIndices}
-            leftCollection={leftCollection}
-            rightCollection={rightCollection}
-            leftArrayActiveIndices={leftArrayActiveIndices}
-            rightArrayActiveIndices={rightArrayActiveIndices}
-          >
-            <h2 className="title">Sorted data</h2>
-            <p className="text">
-              This will be the result of the sorting operations
-            </p>
-            <div
-              className="array-display__steps alert alert-primary"
-              role="alert"
-              id="sortingSteps"
-              ref={sortingStepsRef}
-            >
-              Start by selecting one of the methods
-            </div>
-          </RecursiveTreeArrayDisplay>
+          <div className="array-sort__visualization">
+            {sourceNumbers.length <= 0 ? (
+              <ArrayInputForm setCollection={setSourceNumbers} />
+            ) : (
+              <>
+                <ArrayDisplay
+                  className="mt-5"
+                  id="sourceArrayDisplay"
+                  collection={sourceNumbers}
+                >
+                  <h2 className="title">Row data</h2>
+                  <p className="text">This is your original array.</p>
+                </ArrayDisplay>
+                <MergeSortTemplate
+                  className="mt-5"
+                  highlightIds={highlightIds}
+                />
+                <SortingAlgorithmSelectionForm
+                  className="mt-5"
+                  collection={sourceNumbers}
+                  setCollection={setSortedNumbers}
+                  displayMessage={displayMessage}
+                  setLeftCollection={setLeftCollection}
+                  setRightCollection={setRightCollection}
+                  defaultAlgorithmName={
+                    sortingStepGeneratorsTable.find(
+                      (stg) => stg.displayName === "Merge Sort",
+                    )?.name
+                  }
+                />
+                <RecursiveTreeArrayDisplay
+                  className="mt-5"
+                  id="sortedArrayDisplay"
+                  collection={sortedNumbers}
+                  leftActiveIndices={leftActiveIndices}
+                  rightActiveIndices={rightActiveIndices}
+                  leftCollection={leftCollection}
+                  rightCollection={rightCollection}
+                  leftArrayActiveIndices={leftArrayActiveIndices}
+                  rightArrayActiveIndices={rightArrayActiveIndices}
+                >
+                  <h2 className="title">Sorted data</h2>
+                  <p className="text">
+                    This will be the result of the sorting operations
+                  </p>
+                  <div
+                    className="array-display__steps alert alert-primary"
+                    role="alert"
+                    id="sortingSteps"
+                    ref={sortingStepsRef}
+                  >
+                    Start by selecting one of the methods
+                  </div>
+                </RecursiveTreeArrayDisplay>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </section>

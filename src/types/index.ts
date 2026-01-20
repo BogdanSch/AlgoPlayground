@@ -24,3 +24,8 @@ export interface ISortTemplateProps {
   className?: string;
   highlightIds: string[];
 }
+
+export type ArrayInput = {
+  size: number;
+  elements: string;
+};
