@@ -52,6 +52,14 @@ const generateInsertionSortSteps = (numbers: number[]): SortStep[] => {
     });
   }
 
+  steps.push({
+    message: "Sorting's completed!",
+    newArray: [...numbers],
+    leftActiveIndices: [],
+    rightActiveIndices: [],
+    highlightIds: [],
+  });
+
   return steps;
 };
 

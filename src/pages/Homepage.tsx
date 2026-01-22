@@ -1,7 +1,7 @@
 import { type FC } from "react";
 import { Link } from "react-router-dom";
 import { sortingStepGeneratorsTable } from "../utils";
-import algorithmsInAction from "../images/algorithmsInAction.gif";
+import algorithmsInAction from "../assets/images/algorithmsInAction.gif";
 // https://cdn-images-1.medium.com/max/564/1*qcn0d0W74ZC4duWXwgiTMA.gif
 
 const Homepage: FC = () => {

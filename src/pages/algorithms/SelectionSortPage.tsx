@@ -1,5 +1,5 @@
 import { useRef, useState, type FC } from "react";
-import pseudocodeSelection from "../../images/Pseudoselection.png";
+import pseudocodeSelection from "../../assets/images/Pseudoselection.png";
 import {
   ArrayDisplay,
   ArrayInputForm,
@@ -54,7 +54,7 @@ const SelectionSortPage: FC = () => {
               </p>
               <a
                 className="Download"
-                href="/pythonCode/selectionsort.py"
+                href="/assets/pythonCode/selectionsort.py"
                 download={true}
               >
                 {" "}
@@ -62,7 +62,7 @@ const SelectionSortPage: FC = () => {
               </a>
               <a
                 className="Download"
-                href="/javaCode/selectionsort.js"
+                href="/assets/javaCode/selectionsort.js"
                 download={true}
               >
                 {" "}

@@ -7,7 +7,7 @@ import {
   ArrayInputForm,
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
-import pseudocodeMerge from "../../images/Pseudomerge.png";
+import pseudocodeMerge from "../../assets/images/Pseudomerge.png";
 
 const MergeSortPage = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -70,7 +70,7 @@ const MergeSortPage = () => {
               </p>
               <a
                 className="Download"
-                href="/pythonCode/mergesort.py"
+                href="/assets/pythonCode/mergesort.py"
                 download={true}
               >
                 {" "}
@@ -78,7 +78,7 @@ const MergeSortPage = () => {
               </a>
               <a
                 className="Download"
-                href="/javaCode/mergesort.js"
+                href="/assets/javaCode/mergesort.js"
                 download={true}
               >
                 {" "}

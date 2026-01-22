@@ -44,6 +44,7 @@ mark.text-bold {
   box-shadow: var(--dark-shadow);
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 .header__nav {
   display: flex;
@@ -93,9 +94,14 @@ mark.text-bold {
 .btn {
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
+  transition: border-radius 0.3s ease;
+}
+.btn:hover,
+.btn:focus {
+  border-radius: 16px;
 }
 .btn-icon {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   column-gap: 0.75rem;
 }
@@ -262,3 +268,38 @@ td {
   margin-bottom: 0;
 }
 /* footer - End */
+/* confetti - Start */
+@keyframes rainbowShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 30px rgba(255, 0, 0, 0.8),
+      0 0 60px rgba(0, 0, 255, 0.8);
+  }
+  50% {
+    box-shadow:
+      0 0 50px rgba(255, 0, 0, 1),
+      0 0 100px rgba(0, 0, 255, 1);
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+/* confetti - End */

@@ -12,7 +12,7 @@ import type {
   SortStep,
   DivideAndConquerSortStep,
 } from "../../types";
-import { sortingStepGeneratorsTable } from "../../utils";
+import { createConfetti, sortingStepGeneratorsTable } from "../../utils";
 import { isNullOrWhitespace } from "../../utils/stringHelper";
 
 interface ISortingAlgorithmSelectionFormProps {
@@ -53,6 +53,8 @@ const SortingAlgorithmSelectionForm: FC<
     : sortingStepGeneratorsTable.filter(
         (ssg) => ssg.name === defaultAlgorithmName,
       );
+
+  let successAudio = new Audio("/assets/audio/success.mp3");
 
   useEffect(() => {
     if (isNullOrWhitespace(defaultAlgorithmName) || collection.length <= 0)
@@ -108,15 +110,12 @@ const SortingAlgorithmSelectionForm: FC<
       return;
     }
     if (currentStep + 1 >= steps.length) {
-      displayMessage(
-        "Sorting's completed!",
-        [],
-        [],
-        steps[steps.length - 1].highlightIds,
-      );
       return;
     }
-
+    if (currentStep === steps.length - 2) {
+      successAudio.play();
+      createConfetti();
+    }
     const step = steps[currentStep + 1];
     setCollection(step.newArray);
     if (isDivideAndConquerStep(step)) {

@@ -97,7 +97,7 @@ const ArrayInputForm: FC<IArrayInputFormProps> = ({ setCollection }) => {
             className="form-label sorting-input-form__label"
             htmlFor="elementsInput"
           >
-            Array size:
+            Array size (optional):
           </label>
           <input
             name="elements"

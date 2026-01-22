@@ -6,7 +6,7 @@ import {
   SortingAlgorithmSelectionForm,
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
-import pseudocodeBubble from "../../images/Pseudobubble.png";
+import pseudocodeBubble from "../../assets/images/Pseudobubble.png";
 
 const BubbleSortPage: FC = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -58,7 +58,7 @@ const BubbleSortPage: FC = () => {
               </p>
               <a
                 className="Download"
-                href="/pythonCode/bubblesort.py"
+                href="/assets/pythonCode/bubblesort.py"
                 download={true}
               >
                 {" "}
@@ -66,7 +66,7 @@ const BubbleSortPage: FC = () => {
               </a>
               <a
                 className="Download"
-                href="/pythonCode/bubblesort.js"
+                href="/assets/pythonCode/bubblesort.js"
                 download={true}
               >
                 {" "}

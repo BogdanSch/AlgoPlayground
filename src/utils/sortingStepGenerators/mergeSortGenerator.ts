@@ -16,12 +16,23 @@ const generateMergeSortSteps = (numbers: number[]) => {
     },
   ];
   mergeSort(numbers, steps);
+  steps.push({
+    newArray: [...numbers],
+    message: "Sorting's completed!",
+    leftActiveIndices: [],
+    rightActiveIndices: [],
+    newLeftArrayHalf: [],
+    newRightArrayHalf: [],
+    leftArrayActiveIndices: [],
+    rightArrayActiveIndices: [],
+    highlightIds: [],
+  });
   return steps;
 };
 
 const mergeSort = (
   numbers: number[],
-  steps: DivideAndConquerSortStep[]
+  steps: DivideAndConquerSortStep[],
 ): void => {
   if (numbers.length <= 1) {
     steps.push({
@@ -75,7 +86,7 @@ const merge = (
   leftHalf: number[],
   rightHalf: number[],
   numbers: number[],
-  steps: DivideAndConquerSortStep[]
+  steps: DivideAndConquerSortStep[],
 ): void => {
   let i: number = 0,
     j: number = 0,

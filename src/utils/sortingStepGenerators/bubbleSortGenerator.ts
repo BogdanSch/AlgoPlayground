@@ -47,7 +47,13 @@ const generateBubbleSortSteps = (numbers: number[]): SortStep[] => {
       break;
     }
   }
-
+  steps.push({
+    message: "Sorting's completed!",
+    newArray: [...numbers],
+    leftActiveIndices: [],
+    rightActiveIndices: [],
+    highlightIds: [],
+  });
   return steps;
 };
 

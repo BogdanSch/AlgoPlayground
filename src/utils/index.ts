@@ -3,3 +3,4 @@ export { default as generateInsertionSortSteps } from "./sortingStepGenerators/i
 export { default as generateSelectionSortSteps } from "./sortingStepGenerators/selectionSortGenerator";
 export { default as generateMergeSortSteps } from "./sortingStepGenerators/mergeSortGenerator";
 export { default as sortingStepGeneratorsTable } from "./sortingGenerators";
+export { default as createConfetti } from "./confetti";

@@ -6,7 +6,7 @@ import {
   SortingAlgorithmSelectionForm,
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
-import pseudocodeInsertion from "../../images/Pseudoinsertion.png";
+import pseudocodeInsertion from "../../assets/images/Pseudoinsertion.png";
 
 const InsertionSortPage: FC = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -55,7 +55,7 @@ const InsertionSortPage: FC = () => {
               </p>
               <a
                 className="Download"
-                href="/pythonCode/insertionsort.py"
+                href="/assets/pythonCode/insertionsort.py"
                 download={true}
               >
                 {" "}
@@ -63,7 +63,7 @@ const InsertionSortPage: FC = () => {
               </a>
               <a
                 className="Download"
-                href="/javaCode/insertionsort.js"
+                href="/assets/javaCode/insertionsort.js"
                 download={true}
               >
                 {" "}
