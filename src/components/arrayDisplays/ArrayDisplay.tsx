@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { SCALE_COEFFICIENT } from "../../clientVariables";
+import { SCALE_COEFFICIENT, BLOCK_BASE_SIZE } from "../../clientVariables";
 
 export interface IArrayDisplayProps {
   collection: number[];
@@ -35,7 +35,10 @@ const ArrayDisplay: FC<IArrayDisplayProps> = ({
                   className={`array-display__item-trend ${
                     isLeftActive ? " left-active" : ""
                   }${isRightActive ? " right-active" : ""}`}
-                  style={{ height: SCALE_COEFFICIENT * Math.abs(item) + 24 }}
+                  style={{
+                    height:
+                      SCALE_COEFFICIENT * Math.abs(item) + BLOCK_BASE_SIZE,
+                  }}
                 >
                   {item}
                 </div>

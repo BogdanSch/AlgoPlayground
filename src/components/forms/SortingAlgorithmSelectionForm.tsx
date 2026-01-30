@@ -73,12 +73,13 @@ const SortingAlgorithmSelectionForm: FC<
       setCollection(collection);
       setCurrentStep(0);
 
-      sortedArrayDisplay?.scrollIntoView();
       const newSteps: SortStep[] = targetSortingMethod.generate(collectionCopy);
       setSteps(newSteps);
 
       setCollection(newSteps[0].newArray);
       displayMessage(newSteps[0]);
+
+      sortedArrayDisplay?.scrollIntoView();
     }
   };
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -133,6 +134,9 @@ const SortingAlgorithmSelectionForm: FC<
       displayMessage();
       return;
     }
+    if (currentStep + 1 >= steps.length) {
+      return;
+    }
     const lastStepIndex: number = steps.length - 1;
     getStep(lastStepIndex);
     setCurrentStep(lastStepIndex);
@@ -176,14 +180,14 @@ const SortingAlgorithmSelectionForm: FC<
         <div className="buttons mt-3">
           <button
             type="button"
-            className="btn btn-primary btn-icon"
+            className="btn btn-lg btn-info btn-icon"
             onClick={getFirstStep}
           >
-            <i className="bi bi-caret-left-square"></i>
+            <i className="bi bi-chevron-double-left"></i>
           </button>
           <button
             type="button"
-            className="btn btn-info btn-icon"
+            className="btn btn-lg btn-primary btn-icon"
             onClick={getPreviousStep}
           >
             <i className="bi bi-caret-left-fill"></i>
@@ -195,17 +199,17 @@ const SortingAlgorithmSelectionForm: FC<
           )}
           <button
             type="button"
-            className="btn btn-primary btn-icon"
+            className="btn btn-lg btn-primary btn-icon"
             onClick={getNextStep}
           >
             <i className="bi bi-caret-right-fill"></i>
           </button>
           <button
             type="button"
-            className="btn btn-primary btn-icon"
+            className="btn btn-lg btn-info btn-icon"
             onClick={getLastStep}
           >
-            <i className="bi bi-caret-right-square"></i>
+            <i className="bi bi-chevron-double-right"></i>
           </button>
         </div>
       </div>

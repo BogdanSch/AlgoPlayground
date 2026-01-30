@@ -168,6 +168,17 @@ mark.text-bold {
 .array-display__steps {
   font-size: 1.25rem;
 }
+.array-display__temp {
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: var(--fw-normal);
+}
+.array-display__temp-value {
+  font-weight: var(--fw-bold);
+}
 /* array-display - End */
 /* code-block - Start*/
 .code-block__line {
@@ -217,6 +228,14 @@ td {
   padding: 3px;
   text-decoration: none;
 }
+.heading {
+  font-size: 2.75rem;
+  font-weight: var(--fw-bold);
+}
+.heading-2 {
+  font-size: 2rem;
+  font-weight: var(--fw-bold);
+}
 /* app - Start */
 .app {
   margin-top: 5.75rem;
@@ -225,13 +244,27 @@ td {
   width: 56%;
 }
 /* array-sort - Start */
+.array-sort {
+  margin-top: 6rem;
+}
 .array-sort__visualization {
   margin-top: 3.75rem;
 }
 /* array-sort - End */
+/* unplugged - Start */
+.unplugged {
+  margin-top: 5.75rem;
+}
+.unplugged__video {
+  margin: 2rem auto 0;
+  display: block;
+  width: 90%;
+  min-height: 400px;
+}
+/* unplugged - End */
 /* sorting - Start */
 .sorting {
-  margin-top: 6rem;
+  margin-top: 10rem;
 }
 .sorting__list {
   list-style: none;

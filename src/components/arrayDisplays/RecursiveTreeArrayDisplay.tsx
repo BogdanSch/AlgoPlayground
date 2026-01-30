@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from "react";
-import { SCALE_COEFFICIENT } from "../../clientVariables";
+import { BLOCK_BASE_SIZE, SCALE_COEFFICIENT } from "../../clientVariables";
 
 interface IRecursiveTreeArrayDisplay {
   collection: number[];
@@ -43,7 +43,10 @@ const RecursiveTreeArrayDisplay: FC<IRecursiveTreeArrayDisplay> = ({
                   className={`array-display__item-trend ${
                     isLeftActive ? " left-active" : ""
                   }${isRightActive ? " right-active" : ""}`}
-                  style={{ height: SCALE_COEFFICIENT * Math.abs(item) + 24 }}
+                  style={{
+                    height:
+                      SCALE_COEFFICIENT * Math.abs(item) + BLOCK_BASE_SIZE,
+                  }}
                 >
                   {item}
                 </div>

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { SCALE_COEFFICIENT } from "../../clientVariables";
+import { BLOCK_BASE_SIZE, SCALE_COEFFICIENT } from "../../clientVariables";
 import type { IArrayDisplayProps } from "./ArrayDisplay";
 
 interface IInsertionArrayDisplay extends IArrayDisplayProps {
@@ -32,7 +32,10 @@ const InsertionArrayDisplay: FC<IInsertionArrayDisplay> = ({
                   className={`array-display__item-trend ${
                     isLeftActive ? " left-active" : ""
                   }${isRightActive ? " right-active" : ""}`}
-                  style={{ height: SCALE_COEFFICIENT * Math.abs(item) + 24 }}
+                  style={{
+                    height:
+                      SCALE_COEFFICIENT * Math.abs(item) + BLOCK_BASE_SIZE,
+                  }}
                 >
                   {item}
                 </div>
@@ -45,7 +48,13 @@ const InsertionArrayDisplay: FC<IInsertionArrayDisplay> = ({
         <p>No data to display</p>
       )}
       {temporaryElement !== undefined && (
-        <div className="array-display__temp card mt-4">{temporaryElement}</div>
+        <div className="array-display__temp card mt-5">
+          <div className="card-body">
+            <p className="card-text">
+              Element: <span className="array-display__temp-value">{temporaryElement}</span>
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

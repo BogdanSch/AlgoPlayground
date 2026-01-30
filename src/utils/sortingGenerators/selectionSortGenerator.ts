@@ -50,8 +50,6 @@ export default class SelectionSortGenerator extends SortingStepGenerator {
 
         steps.push(step);
       }
-
-      [numbers[i], numbers[minIndex]] = [numbers[minIndex], numbers[i]];
       steps.push({
         message: `Swap the minimum ${numbers[minIndex]} with ${numbers[i]}.`,
         newArray: [...numbers],
@@ -59,6 +57,7 @@ export default class SelectionSortGenerator extends SortingStepGenerator {
         rightActiveIndices: [minIndex],
         highlightIds: ["swap"],
       });
+      [numbers[i], numbers[minIndex]] = [numbers[minIndex], numbers[i]];
     }
 
     steps.push({

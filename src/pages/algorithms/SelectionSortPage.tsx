@@ -19,9 +19,13 @@ const SelectionSortPage: FC = () => {
 
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
-  const displayMessage = (step: SortStep): void => {
+  const displayMessage = (step?: SortStep): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
+    if (!step) {
+      sortingSteps.innerHTML = "There is nothing to sort!";
+      return;
+    }
 
     setLeftActiveIndices(step.leftActiveIndices);
     setRightActiveIndices(step.rightActiveIndices);
@@ -29,12 +33,13 @@ const SelectionSortPage: FC = () => {
 
     sortingSteps.innerHTML = step.message;
   };
+
   return (
     <section className="array-sort">
       <div className="container">
         <div className="array-sort__wrap">
           <article className="array-sort__article">
-            <h1>Selection Sort</h1>
+            <h1 className="heading">Selection Sort</h1>
             <p className="text">
               The idea of ​​Selection sort is that we repeatedly find the
               smallest element of the array and swap it with the first element

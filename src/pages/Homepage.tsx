@@ -11,7 +11,7 @@ const Homepage: FC = () => {
         <div className="container">
           <div className="app__wrap">
             <div className="text-content text-center">
-              <h1 className="app__title">Algo Playground</h1>
+              <h1 className="app__title heading">Algo Playground</h1>
               <img className="app__image" src={algorithmsInAction} />
               <p className="app__description mt-2 mb-1">
                 Explore and visualize various algorithms in action.
@@ -34,7 +34,7 @@ const Homepage: FC = () => {
         <div className="container">
           <div className="sorting__wrap">
             <div className="text-content text-center">
-              <h2 className="app__title">Array Sorting Algorithms</h2>
+              <h2 className="app__title heading-2">Array Sorting Algorithms</h2>
               <p className="app__description">
                 Explore and visualize various sorting algorithms.
               </p>
