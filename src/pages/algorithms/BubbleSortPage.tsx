@@ -7,6 +7,7 @@ import {
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
 import pseudocodeBubble from "../../assets/images/Pseudobubble.png";
+import type { SortStep } from "../../types";
 
 const BubbleSortPage: FC = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -18,20 +19,19 @@ const BubbleSortPage: FC = () => {
 
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
-  const displayMessage = (
-    message: string,
-    leftActiveIndices: number[],
-    rightActiveIndices: number[],
-    highlightIds: string[],
-  ): void => {
+  const displayMessage = (step?: SortStep): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
+    if (!step) {
+      sortingSteps.innerHTML = "There is nothing to sort!";
+      return;
+    }
 
-    setLeftActiveIndices(leftActiveIndices);
-    setRightActiveIndices(rightActiveIndices);
-    setHighlightIds(highlightIds);
+    setLeftActiveIndices(step.leftActiveIndices);
+    setRightActiveIndices(step.rightActiveIndices);
+    setHighlightIds(step.highlightIds);
 
-    sortingSteps.innerHTML = message;
+    sortingSteps.innerHTML = step.message;
   };
 
   return (

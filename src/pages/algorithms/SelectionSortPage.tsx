@@ -7,6 +7,7 @@ import {
   SortingAlgorithmSelectionForm,
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
+import type { SortStep } from "../../types";
 
 const SelectionSortPage: FC = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -18,20 +19,15 @@ const SelectionSortPage: FC = () => {
 
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
-  const displayMessage = (
-    message: string,
-    leftActiveIndices: number[],
-    rightActiveIndices: number[],
-    highlightIds: string[],
-  ): void => {
+  const displayMessage = (step: SortStep): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
 
-    setLeftActiveIndices(leftActiveIndices);
-    setRightActiveIndices(rightActiveIndices);
-    setHighlightIds(highlightIds);
+    setLeftActiveIndices(step.leftActiveIndices);
+    setRightActiveIndices(step.rightActiveIndices);
+    setHighlightIds(step.highlightIds);
 
-    sortingSteps.innerHTML = message;
+    sortingSteps.innerHTML = step.message;
   };
   return (
     <section className="array-sort">

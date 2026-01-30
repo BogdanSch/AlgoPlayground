@@ -1,22 +1,19 @@
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { SCALE_COEFFICIENT } from "../../clientVariables";
+import type { IArrayDisplayProps } from "./ArrayDisplay";
 
-export interface IArrayDisplayProps {
-  collection: number[];
-  className?: string;
-  id: string;
-  children?: ReactNode;
-  leftActiveIndices?: number[];
-  rightActiveIndices?: number[];
+interface IInsertionArrayDisplay extends IArrayDisplayProps {
+  temporaryElement?: number;
 }
 
-const ArrayDisplay: FC<IArrayDisplayProps> = ({
+const InsertionArrayDisplay: FC<IInsertionArrayDisplay> = ({
   className,
   id,
   collection,
   children,
   leftActiveIndices,
   rightActiveIndices,
+  temporaryElement,
 }) => {
   return (
     <div className={`array-display${className ? ` ${className}` : ``}`} id={id}>
@@ -47,8 +44,11 @@ const ArrayDisplay: FC<IArrayDisplayProps> = ({
       ) : (
         <p>No data to display</p>
       )}
+      {temporaryElement !== undefined && (
+        <div className="array-display__temp card mt-4">{temporaryElement}</div>
+      )}
     </div>
   );
 };
 
-export default ArrayDisplay;
+export default InsertionArrayDisplay;

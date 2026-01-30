@@ -29,9 +29,9 @@ const RecursiveTreeArrayDisplay: FC<IRecursiveTreeArrayDisplay> = ({
   return (
     <div className={`array-display${className ? ` ${className}` : ``}`} id={id}>
       {children}
-      <ul className="array-display__list">
-        {collection.length > 0 ? (
-          collection.map((item, index) => {
+      {collection.length > 0 ? (
+        <ul className="array-display__list">
+          {collection.map((item, index) => {
             let isLeftActive: boolean =
               leftActiveIndices?.includes(index) ?? false;
             let isRightActive: boolean =
@@ -50,15 +50,15 @@ const RecursiveTreeArrayDisplay: FC<IRecursiveTreeArrayDisplay> = ({
                 <span className="array-display__item-index">{index}</span>
               </li>
             );
-          })
-        ) : (
-          <p>No data to display</p>
-        )}
-      </ul>
+          })}
+        </ul>
+      ) : (
+        <p>No data to display</p>
+      )}
       <div className="array-display__sub-displays mt-4">
-        <ul className="array-display__list card">
-          {leftCollection.length > 0 ? (
-            leftCollection.map((item, index) => {
+        {leftCollection.length > 0 ? (
+          <ul className="array-display__list card">
+            {leftCollection.map((item, index) => {
               let isActive: boolean =
                 leftArrayActiveIndices?.includes(index) ?? false;
 
@@ -75,14 +75,14 @@ const RecursiveTreeArrayDisplay: FC<IRecursiveTreeArrayDisplay> = ({
                   <span className="array-display__item-index">{index}</span>
                 </li>
               );
-            })
-          ) : (
-            <p>No left hand data to display</p>
-          )}
-        </ul>
-        <ul className="array-display__list card">
-          {rightCollection.length > 0 ? (
-            rightCollection.map((item, index) => {
+            })}
+          </ul>
+        ) : (
+          <p>No left hand data to display</p>
+        )}
+        {rightCollection.length > 0 ? (
+          <ul className="array-display__list card">
+            {rightCollection.map((item, index) => {
               let isActive: boolean =
                 rightArrayActiveIndices?.includes(index) ?? false;
               return (
@@ -98,11 +98,11 @@ const RecursiveTreeArrayDisplay: FC<IRecursiveTreeArrayDisplay> = ({
                   <span className="array-display__item-index">{index}</span>
                 </li>
               );
-            })
-          ) : (
-            <p>No right hand data to display</p>
-          )}
-        </ul>
+            })}
+          </ul>
+        ) : (
+          <p>No right hand data to display</p>
+        )}
       </div>
     </div>
   );

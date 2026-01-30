@@ -13,12 +13,9 @@ export interface DivideAndConquerSortStep extends SortStep {
   rightArrayActiveIndices: number[];
 }
 
-export type SortingStepGenerator = {
-  displayName: string;
-  name: string;
-  path: string;
-  method: (numbers: number[]) => SortStep[];
-};
+export interface InsertionSortStep extends SortStep {
+  temporaryElement?: number;
+}
 
 export interface ISortTemplateProps {
   className?: string;

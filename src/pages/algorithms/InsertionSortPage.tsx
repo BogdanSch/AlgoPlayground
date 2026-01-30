@@ -1,12 +1,13 @@
 import { useRef, useState, type FC } from "react";
 import {
-  ArrayDisplay,
+  InsertionArrayDisplay,
   ArrayInputForm,
   InsertionSortTemplate,
   SortingAlgorithmSelectionForm,
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
 import pseudocodeInsertion from "../../assets/images/Pseudoinsertion.png";
+import type { InsertionSortStep, SortStep } from "../../types";
 
 const InsertionSortPage: FC = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -15,23 +16,28 @@ const InsertionSortPage: FC = () => {
   const [leftActiveIndices, setLeftActiveIndices] = useState<number[]>([]);
   const [rightActiveIndices, setRightActiveIndices] = useState<number[]>([]);
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
+  const [temporaryElement, setTemporaryElement] = useState<number | undefined>(
+    undefined,
+  );
 
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
-  const displayMessage = (
-    message: string,
-    leftActiveIndices: number[],
-    rightActiveIndices: number[],
-    highlightIds: string[],
-  ): void => {
+  const displayMessage = (step?: SortStep): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
+    if (!step) {
+      sortingSteps.innerHTML = "There is nothing to sort!";
+      return;
+    }
 
-    setLeftActiveIndices(leftActiveIndices);
-    setRightActiveIndices(rightActiveIndices);
-    setHighlightIds(highlightIds);
+    setLeftActiveIndices(step.leftActiveIndices);
+    setRightActiveIndices(step.rightActiveIndices);
+    setHighlightIds(step.highlightIds);
 
-    sortingSteps.innerHTML = message;
+    const insertionStep = step as InsertionSortStep;
+    setTemporaryElement(insertionStep.temporaryElement);
+
+    sortingSteps.innerHTML = step.message;
   };
   return (
     <section className="array-sort">
@@ -258,14 +264,14 @@ const InsertionSortPage: FC = () => {
               <ArrayInputForm setCollection={setSourceNumbers} />
             ) : (
               <>
-                <ArrayDisplay
+                <InsertionArrayDisplay
                   className="mt-5"
                   id="sourceArrayDisplay"
                   collection={sourceNumbers}
                 >
                   <h2 className="title">Row data</h2>
                   <p className="text">This is your original array.</p>
-                </ArrayDisplay>
+                </InsertionArrayDisplay>
                 <InsertionSortTemplate
                   className="mt-5"
                   highlightIds={highlightIds}
@@ -281,12 +287,13 @@ const InsertionSortPage: FC = () => {
                     )?.name
                   }
                 />
-                <ArrayDisplay
+                <InsertionArrayDisplay
                   className="mt-5"
                   id="sortedArrayDisplay"
                   collection={sortedNumbers}
                   leftActiveIndices={leftActiveIndices}
                   rightActiveIndices={rightActiveIndices}
+                  temporaryElement={temporaryElement}
                 >
                   <h2 className="title">Sorted data</h2>
                   <p className="text">
@@ -300,7 +307,7 @@ const InsertionSortPage: FC = () => {
                   >
                     Start by selecting one of the methods
                   </div>
-                </ArrayDisplay>
+                </InsertionArrayDisplay>
               </>
             )}
           </div>

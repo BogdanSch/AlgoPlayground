@@ -1,6 +1,3 @@
-export { default as generateBubbleSortSteps } from "./sortingStepGenerators/bubbleSortGenerator";
-export { default as generateInsertionSortSteps } from "./sortingStepGenerators/insertionSortGenerator";
-export { default as generateSelectionSortSteps } from "./sortingStepGenerators/selectionSortGenerator";
-export { default as generateMergeSortSteps } from "./sortingStepGenerators/mergeSortGenerator";
-export { default as sortingStepGeneratorsTable } from "./sortingGenerators";
+export { default as sortingStepGeneratorsTable } from "./sortingGeneratorsTable";
 export { default as createConfetti } from "./confetti";
+export { default as SortingStepGenerator } from "./sortingGenerators/sortingStepGenerator";

@@ -8,6 +8,7 @@ import {
 } from "../../components";
 import { sortingStepGeneratorsTable } from "../../utils";
 import pseudocodeMerge from "../../assets/images/Pseudomerge.png";
+import type { DivideAndConquerSortStep, SortStep } from "../../types";
 
 const MergeSortPage = () => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>([]);
@@ -27,24 +28,23 @@ const MergeSortPage = () => {
   >([]);
   const sortingStepsRef = useRef<HTMLDivElement | null>(null);
 
-  const displayMessage = (
-    message: string,
-    leftActiveIndices: number[],
-    rightActiveIndices: number[],
-    highlightIds: string[],
-    leftArrayActiveIndices?: number[],
-    rightArrayActiveIndices?: number[],
-  ): void => {
+  const displayMessage = (step?: SortStep): void => {
     const sortingSteps: HTMLDivElement | null = sortingStepsRef.current;
     if (!sortingSteps) return;
+    if (!step) {
+      sortingSteps.innerHTML = "There is nothing to sort!";
+      return;
+    }
 
-    setLeftActiveIndices(leftActiveIndices);
-    setRightActiveIndices(rightActiveIndices);
-    setHighlightIds(highlightIds);
-    setLeftArrayActiveIndices(leftArrayActiveIndices ?? []);
-    setRightArrayActiveIndices(rightArrayActiveIndices ?? []);
+    setLeftActiveIndices(step.leftActiveIndices);
+    setRightActiveIndices(step.rightActiveIndices);
+    setHighlightIds(step.highlightIds);
 
-    sortingSteps.innerHTML = message;
+    const mergeStep = step as DivideAndConquerSortStep;
+    setLeftArrayActiveIndices(mergeStep.leftArrayActiveIndices || []);
+    setRightArrayActiveIndices(mergeStep.rightArrayActiveIndices || []);
+
+    sortingSteps.innerHTML = step.message;
   };
 
   return (
