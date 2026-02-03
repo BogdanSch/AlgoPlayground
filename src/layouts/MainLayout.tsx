@@ -9,10 +9,10 @@ const MainLayout: FC = () => {
     <>
       <Header />
       <div id="content">
-      <main className="main">
-        <Outlet />
-      </main>
-      <Sidebar />
+        <main className="main">
+          <Outlet />
+        </main>
+        <Sidebar />
       </div>
       <Footer />
     </>

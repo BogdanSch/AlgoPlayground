@@ -19,6 +19,16 @@ const Header: FC = () => {
                   </div>
                 </Link>
               </li>
+              <li className="header__item nav-item burger">
+                <label className="burger__menu" htmlFor="burgerInput">
+                  <input
+                    className="burger__input"
+                    type="checkbox"
+                    id="burgerInput"
+                    name="burger"
+                  />
+                </label>
+              </li>
             </ul>
           </nav>
         </div>
