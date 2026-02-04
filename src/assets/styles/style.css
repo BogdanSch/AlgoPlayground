@@ -14,6 +14,8 @@
   --cyan: #00ddeb;
 
   --dark-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  --light-shadow:
+    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 
   --fw-normal: 500;
   --fw-semi-bold: 600;
@@ -162,8 +164,9 @@ body:has(.burger__input:checked) {
   background-color: var(--extra-light);
   border-radius: 12px;
   box-shadow: var(--dark-shadow);
-  min-height: 100vh;
-  overflow-y: auto;
+  position: sticky;
+  top: calc(var(--header-height) + 0.75rem);
+  max-height: calc(100vh - var(--header-height) - 1.5rem);
 }
 .sidebar__list {
   list-style: none;
@@ -174,25 +177,41 @@ body:has(.burger__input:checked) {
   align-items: center;
   row-gap: 0.75rem;
 }
+.sidebar__item {
+  padding: 0.25rem 1rem;
+  background-color: var(--light);
+  border-radius: 8px;
+  box-shadow: var(--light-shadow);
+  display: inline-block;
+  transition: all 0.2s ease-in;
+  transform-origin: right center;
+  position: relative;
+  z-index: 2;
+}
+.sidebar__item:hover {
+  transform: scale(1.3);
+}
 .sidebar__link {
   font-size: 1.25rem;
   font-weight: var(--fw-semi-bold);
   text-decoration: none;
-  padding: 0.25rem 1rem;
-  background-color: var(--light);
-  border-radius: 12px;
 }
 @media screen and (max-width: 1030px) {
   .sidebar {
+    padding-top: 16px;
     width: 18rem;
     margin-right: 0;
     position: fixed;
     top: var(--header-height);
     right: 0;
-    z-index: 101;
+    z-index: 1;
     overflow-y: auto;
     transform: translateX(100%);
     transition: transform var(--animation-timing);
+    min-height: 100vh;
+  }
+  .sidebar__link {
+    padding: 0.5rem 1.5rem;
   }
   .sidebar__list {
     row-gap: 1.25rem;
@@ -302,14 +321,11 @@ td {
   padding: 20px !important;
   outline: var(--grey) solid 1px !important;
 }
-.navigation {
+/* .navigation {
   display: inline-block;
   transition: all 0.2s ease-in;
   transform-origin: right center;
-}
-.navigation:hover {
-  transform: scale(1.5);
-}
+} */
 #content {
   position: relative;
   display: flex;
@@ -394,6 +410,11 @@ td {
   width: 100%;
   text-align: center;
   font-weight: var(--fw-semi-bold);
+}
+@media screen and (max-width: 992px) {
+  .sorting-input-form {
+    width: 90%;
+  }
 }
 /* sorting - End */
 /* footer - Start */

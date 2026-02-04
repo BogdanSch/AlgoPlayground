@@ -6,22 +6,22 @@ const Sidebar: FC = () => {
     <aside className="sidebar">
       <nav className="sidebar__nav">
         <ul className="sidebar__list">
-          <li className="sidebar__item navigation">
+          <li className="sidebar__item">
             <Link className="sidebar__link" to="/algorithms/bubble">
               Bubble Sort
             </Link>
           </li>
-          <li className="sidebar__item navigation">
+          <li className="sidebar__item">
             <Link className="sidebar__link" to="/algorithms/insertion">
               Insertion Sort
             </Link>
           </li>
-          <li className="sidebar__item navigation">
+          <li className="sidebar__item">
             <Link className="sidebar__link" to="/algorithms/merge">
               Merge Sort
             </Link>
           </li>
-          <li className="sidebar__item navigation">
+          <li className="sidebar__item">
             <Link className="sidebar__link" to="/algorithms/selection">
               Selection Sort
             </Link>
