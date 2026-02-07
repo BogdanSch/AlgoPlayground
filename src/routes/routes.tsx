@@ -1,7 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "../layouts";
 
-import { BubbleSortPage, Homepage, InsertionSortPage, MergeSortPage, SelectionSortPage } from "../pages";
+import {
+  BubbleSortPage,
+  Homepage,
+  InsertionSortPage,
+  MergeSortPage,
+  NotFound,
+  SelectionSortPage,
+} from "../pages";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +17,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Homepage /> },
       { path: "home", element: <Homepage /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
   {
@@ -17,9 +25,9 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "merge", element: <MergeSortPage /> },
-      { path: "bubble", element: <BubbleSortPage/> },
-      { path: "selection", element: <SelectionSortPage/> },
-      { path: "insertion", element: <InsertionSortPage/> },
+      { path: "bubble", element: <BubbleSortPage /> },
+      { path: "selection", element: <SelectionSortPage /> },
+      { path: "insertion", element: <InsertionSortPage /> },
     ],
   },
 ]);

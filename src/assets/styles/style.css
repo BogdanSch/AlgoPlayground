@@ -38,6 +38,9 @@ body {
 }
 .wrapper {
   overflow: clip;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 .main {
   flex: 1;
@@ -321,15 +324,11 @@ td {
   padding: 20px !important;
   outline: var(--grey) solid 1px !important;
 }
-/* .navigation {
-  display: inline-block;
-  transition: all 0.2s ease-in;
-  transform-origin: right center;
-} */
 #content {
   position: relative;
   display: flex;
   flex-direction: row;
+  flex: 1;
 }
 .CodeExp {
   background-color: lightcyan;
@@ -368,6 +367,32 @@ td {
 .app__image {
   width: 56%;
 }
+/* app - End */
+/* error - Start */
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.error__wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.error__card {
+  text-align: center;
+  max-width: 600px;
+  min-height: 280px;
+}
+.error__card-body {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* error - End */
 /* array-sort - Start */
 .array-sort {
   margin-top: 6rem;
