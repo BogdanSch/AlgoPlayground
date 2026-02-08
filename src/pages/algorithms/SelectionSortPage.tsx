@@ -41,13 +41,16 @@ const SelectionSortPage: FC = () => {
           <article className="array-sort__article">
             <h1 className="heading">Selection Sort</h1>
             <p className="text">
-              The idea of ​​Selection sort is that we repeatedly find the
-              smallest element of the array and swap it with the first element
-              and sort that into the new array.
+              The idea of​Selection sort is that we repeatedly find the smallest
+              element of the array and swap it with the first element and sort
+              that into the new array.
             </p>
-            <h2>Pseudocode:</h2>
-            <img src={pseudocodeSelection} alt="pseudo"></img>
-            <p></p>
+            <h2 className="heading-2">Pseudocode:</h2>
+            <img
+              className="array-sort__image"
+              src={pseudocodeSelection}
+              alt="Pseudocode for selection sort"
+            ></img>
             <nav>
               <p className="LinkText">
                 If you want to see how fast different languages sort download

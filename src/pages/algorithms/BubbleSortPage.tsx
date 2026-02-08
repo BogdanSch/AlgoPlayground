@@ -48,8 +48,12 @@ const BubbleSortPage: FC = () => {
               because it helps you better understand more advanced
               algorithms.{" "}
             </p>
-            <h3>Pseudocode:</h3>
-            <img src={pseudocodeBubble} alt="pseudo"></img>
+            <h2 className="heading-2">Pseudocode:</h2>
+            <img
+              className="array-sort__image"
+              src={pseudocodeBubble}
+              alt="Pseudocode for bubble sort"
+            />
             <p> </p>
             <nav>
               <p className="LinkText">

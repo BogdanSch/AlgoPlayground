@@ -52,9 +52,12 @@ const InsertionSortPage: FC = () => {
                 correct position, just as if you were sorting playing cards in
                 your hand.
               </p>
-              <h3>PseudoCode:</h3>
-              <img src={pseudocodeInsertion} alt="pseudo"></img>
-              <p> </p>
+              <h2 className="heading-2">PseudoCode:</h2>
+              <img
+                className="array-sort__image"
+                src={pseudocodeInsertion}
+                alt="Pseudocode for insertion sort"
+              />
               <nav>
                 <p className="LinkText">
                   If you want to see how fast different languages sort download

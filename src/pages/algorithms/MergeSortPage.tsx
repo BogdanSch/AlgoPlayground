@@ -60,8 +60,12 @@ const MergeSortPage = () => {
               problem into smaller, easier problems, Merge Sort can sort data
               very efficiently, even for large lists.
             </p>
-            <h3>PseudoCode:</h3>
-            <img src={pseudocodeMerge} alt="pseudo"></img>
+            <h2 className="heading-2">PseudoCode:</h2>
+            <img
+              className="array-sort__image"
+              src={pseudocodeMerge}
+              alt="Pseudocode for merge sort"
+            ></img>
             <p></p>
             <nav>
               <p className="LinkText">

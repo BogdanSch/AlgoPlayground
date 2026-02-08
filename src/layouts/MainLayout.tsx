@@ -1,8 +1,6 @@
 import type { FC } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./partials/Header";
-import Footer from "./partials/Footer";
-import Sidebar from "./partials/Sidebar";
+import {Header, Footer, Sidebar} from "./partials";
 
 const MainLayout: FC = () => {
   return (
