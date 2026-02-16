@@ -87,7 +87,7 @@ const SortingAlgorithmSelectionForm: FC<
     console.log(selectedMethodName);
     startSorting(selectedMethodName);
   };
-  const getStep = (stepIndex: number): void => {
+  const applyStep = (stepIndex: number): void => {
     if (stepIndex === steps.length - 1) {
       successAudio.play();
       createConfetti();
@@ -112,7 +112,7 @@ const SortingAlgorithmSelectionForm: FC<
       return;
     }
     const nextStepIndex: number = currentStep + 1;
-    getStep(nextStepIndex);
+    applyStep(nextStepIndex);
     setCurrentStep(nextStepIndex);
   };
   const getPreviousStep = (): void => {
@@ -126,7 +126,7 @@ const SortingAlgorithmSelectionForm: FC<
       return;
     }
     const previousStepIndex: number = currentStep - 1;
-    getStep(previousStepIndex);
+    applyStep(previousStepIndex);
     setCurrentStep(previousStepIndex);
   };
   const getLastStep = () => {
@@ -138,7 +138,7 @@ const SortingAlgorithmSelectionForm: FC<
       return;
     }
     const lastStepIndex: number = steps.length - 1;
-    getStep(lastStepIndex);
+    applyStep(lastStepIndex);
     setCurrentStep(lastStepIndex);
   };
   const getFirstStep = () => {
@@ -147,7 +147,7 @@ const SortingAlgorithmSelectionForm: FC<
       return;
     }
     const firstStepIndex: number = 0;
-    getStep(firstStepIndex);
+    applyStep(firstStepIndex);
     setCurrentStep(firstStepIndex);
   };
 

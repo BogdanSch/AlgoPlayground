@@ -41,7 +41,6 @@ export default class BubbleSortGenerator extends SortingStepGenerator {
         } else {
           step.message = `${numbers[j]} <= ${numbers[j + 1]}, no swap.`;
         }
-
         steps.push(step);
       }
 

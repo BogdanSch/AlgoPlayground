@@ -27,24 +27,26 @@ const SelectionSortTemplate: FC<ISortTemplateProps> = ({
   ];
 
   return (
-    <pre
-      className={`code-block${isNullOrWhitespace(className) ? "" : ` ${className}`}`}
-    >
-      {selectionCode.map((line, index) => {
-        const isHighlighted = line.id && highlightIds.includes(line.id);
-        return (
-          <div
-            key={index}
-            className={
-              "code-block__line" +
-              (isHighlighted ? " code-block__line--highlight" : "")
-            }
-          >
-            {line.text}
-          </div>
-        );
-      })}
-    </pre>
+    <div className="code-block__wrap">
+      <pre
+        className={`code-block${isNullOrWhitespace(className) ? "" : ` ${className}`}`}
+      >
+        {selectionCode.map((line, index) => {
+          const isHighlighted = line.id && highlightIds.includes(line.id);
+          return (
+            <div
+              key={index}
+              className={
+                "code-block__line" +
+                (isHighlighted ? " code-block__line--highlight" : "")
+              }
+            >
+              {line.text}
+            </div>
+          );
+        })}
+      </pre>
+    </div>
   );
 };
 
